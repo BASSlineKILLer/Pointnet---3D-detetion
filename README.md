@@ -1,5 +1,43 @@
 # 暑期实习项目-激光雷达3D点云目标检测
 ## CIDI短期实习项目（2025.7）
+### 环境配置说明：
+
+实验设备：
+NVIDIA GeForce RTX 4090*3
+实验环境：
+PyTorch  2.0.0
+Python  3.8(ubuntu20.04)
+CUDA  11.8
+依赖库：
+numpy==1.23.5
+llvmlite==0.43.0
+numba==0.60.0
+torch==1.12.1
+tensorboardX==2.6.4
+easydict==1.13
+pyyaml==6.0.2
+scikit-image==0.24.0
+tqdm==4.67.1
+torchvision==0.13.1
+SharedArray==3.2.4
+opencv-python==4.12.0.88
+pyquaternion==0.9.9
+
+
+
+### 实验脚本：
+```bash
+python train.py --cfg_file tools/cfgs/kitti_models/pointrcnn.yaml 
+```
+
+### 改进模型（含数据增强、加权采样、FP-backprop）
+```bash
+python train.py --cfg_file tools/cfgs/kitti_models/pointrcnn.yaml --extra_tag our_model
+```
+### 模型评估：在 val 集上测试，计算 AP 值、召回率及可视化结果：
+```bash
+python test.py --cfg_file tools/cfgs/kitti_models/pointrcnn.yaml --eval_all
+```
 ## 实验内容
 - 基于OpenPCDet框架进行模型设计与训练
 - 对模型进行参数调优
