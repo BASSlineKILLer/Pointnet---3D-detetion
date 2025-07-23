@@ -1,0 +1,1250 @@
+2025-07-12 11:18:57,215   INFO  **********************Start logging**********************
+2025-07-12 11:18:57,215   INFO  CUDA_VISIBLE_DEVICES=ALL
+2025-07-12 11:18:57,215   INFO  cfg_file         ./cfgs/nuscenes_models/cbgs_voxel0075_voxelnext.yaml
+2025-07-12 11:18:57,215   INFO  batch_size       4
+2025-07-12 11:18:57,215   INFO  workers          4
+2025-07-12 11:18:57,215   INFO  extra_tag        default
+2025-07-12 11:18:57,215   INFO  ckpt             None
+2025-07-12 11:18:57,215   INFO  pretrained_model None
+2025-07-12 11:18:57,215   INFO  launcher         none
+2025-07-12 11:18:57,215   INFO  tcp_port         18888
+2025-07-12 11:18:57,215   INFO  local_rank       None
+2025-07-12 11:18:57,216   INFO  set_cfgs         None
+2025-07-12 11:18:57,216   INFO  max_waiting_mins 30
+2025-07-12 11:18:57,216   INFO  start_epoch      0
+2025-07-12 11:18:57,216   INFO  eval_tag         default
+2025-07-12 11:18:57,216   INFO  eval_all         True
+2025-07-12 11:18:57,216   INFO  ckpt_dir         None
+2025-07-12 11:18:57,216   INFO  save_to_file     False
+2025-07-12 11:18:57,216   INFO  infer_time       False
+2025-07-12 11:18:57,216   INFO  cfg.ROOT_DIR: /root/autodl-tmp/OpenPCDet
+2025-07-12 11:18:57,216   INFO  cfg.LOCAL_RANK: 0
+2025-07-12 11:18:57,216   INFO  cfg.CLASS_NAMES: ['car', 'truck', 'construction_vehicle', 'bus', 'trailer', 'barrier', 'motorcycle', 'bicycle', 'pedestrian', 'traffic_cone']
+2025-07-12 11:18:57,216   INFO  ----------- DATA_CONFIG -----------
+2025-07-12 11:18:57,216   INFO  cfg.DATA_CONFIG.DATASET: NuScenesDataset
+2025-07-12 11:18:57,216   INFO  cfg.DATA_CONFIG.DATA_PATH: ../data/nuscenes
+2025-07-12 11:18:57,216   INFO  cfg.DATA_CONFIG.VERSION: v1.0-mini
+2025-07-12 11:18:57,216   INFO  cfg.DATA_CONFIG.MAX_SWEEPS: 10
+2025-07-12 11:18:57,216   INFO  cfg.DATA_CONFIG.PRED_VELOCITY: True
+2025-07-12 11:18:57,216   INFO  cfg.DATA_CONFIG.SET_NAN_VELOCITY_TO_ZEROS: True
+2025-07-12 11:18:57,216   INFO  cfg.DATA_CONFIG.FILTER_MIN_POINTS_IN_GT: 1
+2025-07-12 11:18:57,216   INFO  ----------- DATA_SPLIT -----------
+2025-07-12 11:18:57,216   INFO  cfg.DATA_CONFIG.DATA_SPLIT.train: train
+2025-07-12 11:18:57,216   INFO  cfg.DATA_CONFIG.DATA_SPLIT.test: val
+2025-07-12 11:18:57,216   INFO  ----------- INFO_PATH -----------
+2025-07-12 11:18:57,216   INFO  cfg.DATA_CONFIG.INFO_PATH.train: ['nuscenes_infos_10sweeps_train.pkl']
+2025-07-12 11:18:57,216   INFO  cfg.DATA_CONFIG.INFO_PATH.test: ['nuscenes_infos_10sweeps_val.pkl']
+2025-07-12 11:18:57,216   INFO  cfg.DATA_CONFIG.POINT_CLOUD_RANGE: [-54.0, -54.0, -5.0, 54.0, 54.0, 3.0]
+2025-07-12 11:18:57,216   INFO  cfg.DATA_CONFIG.BALANCED_RESAMPLING: True
+2025-07-12 11:18:57,216   INFO  ----------- DATA_AUGMENTOR -----------
+2025-07-12 11:18:57,216   INFO  cfg.DATA_CONFIG.DATA_AUGMENTOR.DISABLE_AUG_LIST: ['placeholder']
+2025-07-12 11:18:57,216   INFO  cfg.DATA_CONFIG.DATA_AUGMENTOR.AUG_CONFIG_LIST: [{'NAME': 'gt_sampling', 'DB_INFO_PATH': ['nuscenes_dbinfos_10sweeps_withvelo.pkl'], 'USE_SHARED_MEMORY': False, 'DB_DATA_PATH': ['nuscenes_dbinfos_10sweeps_withvelo_global.pkl.npy'], 'PREPARE': {'filter_by_min_points': ['car:5', 'truck:5', 'construction_vehicle:5', 'bus:5', 'trailer:5', 'barrier:5', 'motorcycle:5', 'bicycle:5', 'pedestrian:5', 'traffic_cone:5']}, 'SAMPLE_GROUPS': ['car:2', 'truck:2', 'construction_vehicle:2', 'bus:2', 'trailer:2', 'barrier:2', 'motorcycle:2', 'bicycle:2', 'pedestrian:2', 'traffic_cone:2'], 'NUM_POINT_FEATURES': 5, 'DATABASE_WITH_FAKELIDAR': False, 'REMOVE_EXTRA_WIDTH': [0.0, 0.0, 0.0], 'LIMIT_WHOLE_SCENE': True}, {'NAME': 'random_world_flip', 'ALONG_AXIS_LIST': ['x', 'y']}, {'NAME': 'random_world_rotation', 'WORLD_ROT_ANGLE': [-0.78539816, 0.78539816]}, {'NAME': 'random_world_scaling', 'WORLD_SCALE_RANGE': [0.9, 1.1]}, {'NAME': 'random_world_translation', 'NOISE_TRANSLATE_STD': [0.5, 0.5, 0.5]}]
+2025-07-12 11:18:57,216   INFO  ----------- POINT_FEATURE_ENCODING -----------
+2025-07-12 11:18:57,216   INFO  cfg.DATA_CONFIG.POINT_FEATURE_ENCODING.encoding_type: absolute_coordinates_encoding
+2025-07-12 11:18:57,216   INFO  cfg.DATA_CONFIG.POINT_FEATURE_ENCODING.used_feature_list: ['x', 'y', 'z', 'intensity', 'timestamp']
+2025-07-12 11:18:57,217   INFO  cfg.DATA_CONFIG.POINT_FEATURE_ENCODING.src_feature_list: ['x', 'y', 'z', 'intensity', 'timestamp']
+2025-07-12 11:18:57,217   INFO  cfg.DATA_CONFIG.DATA_PROCESSOR: [{'NAME': 'mask_points_and_boxes_outside_range', 'REMOVE_OUTSIDE_BOXES': True}, {'NAME': 'shuffle_points', 'SHUFFLE_ENABLED': {'train': True, 'test': True}}, {'NAME': 'transform_points_to_voxels', 'VOXEL_SIZE': [0.075, 0.075, 0.2], 'MAX_POINTS_PER_VOXEL': 10, 'MAX_NUMBER_OF_VOXELS': {'train': 120000, 'test': 160000}}]
+2025-07-12 11:18:57,217   INFO  cfg.DATA_CONFIG._BASE_CONFIG_: cfgs/dataset_configs/nuscenes_dataset.yaml
+2025-07-12 11:18:57,217   INFO  ----------- MODEL -----------
+2025-07-12 11:18:57,217   INFO  cfg.MODEL.NAME: VoxelNeXt
+2025-07-12 11:18:57,217   INFO  ----------- VFE -----------
+2025-07-12 11:18:57,217   INFO  cfg.MODEL.VFE.NAME: MeanVFE
+2025-07-12 11:18:57,217   INFO  ----------- BACKBONE_3D -----------
+2025-07-12 11:18:57,217   INFO  cfg.MODEL.BACKBONE_3D.NAME: VoxelResBackBone8xVoxelNeXt
+2025-07-12 11:18:57,217   INFO  ----------- DENSE_HEAD -----------
+2025-07-12 11:18:57,217   INFO  cfg.MODEL.DENSE_HEAD.NAME: VoxelNeXtHead
+2025-07-12 11:18:57,217   INFO  cfg.MODEL.DENSE_HEAD.CLASS_AGNOSTIC: False
+2025-07-12 11:18:57,217   INFO  cfg.MODEL.DENSE_HEAD.INPUT_FEATURES: 128
+2025-07-12 11:18:57,217   INFO  cfg.MODEL.DENSE_HEAD.CLASS_NAMES_EACH_HEAD: [['car'], ['truck', 'construction_vehicle'], ['bus', 'trailer'], ['barrier'], ['motorcycle', 'bicycle'], ['pedestrian', 'traffic_cone']]
+2025-07-12 11:18:57,217   INFO  cfg.MODEL.DENSE_HEAD.SHARED_CONV_CHANNEL: 128
+2025-07-12 11:18:57,217   INFO  cfg.MODEL.DENSE_HEAD.KERNEL_SIZE_HEAD: 1
+2025-07-12 11:18:57,217   INFO  cfg.MODEL.DENSE_HEAD.USE_BIAS_BEFORE_NORM: True
+2025-07-12 11:18:57,217   INFO  cfg.MODEL.DENSE_HEAD.NUM_HM_CONV: 2
+2025-07-12 11:18:57,217   INFO  ----------- SEPARATE_HEAD_CFG -----------
+2025-07-12 11:18:57,217   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_ORDER: ['center', 'center_z', 'dim', 'rot', 'vel']
+2025-07-12 11:18:57,217   INFO  ----------- HEAD_DICT -----------
+2025-07-12 11:18:57,217   INFO  ----------- center -----------
+2025-07-12 11:18:57,217   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.center.out_channels: 2
+2025-07-12 11:18:57,217   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.center.num_conv: 2
+2025-07-12 11:18:57,217   INFO  ----------- center_z -----------
+2025-07-12 11:18:57,217   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.center_z.out_channels: 1
+2025-07-12 11:18:57,217   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.center_z.num_conv: 2
+2025-07-12 11:18:57,217   INFO  ----------- dim -----------
+2025-07-12 11:18:57,217   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.dim.out_channels: 3
+2025-07-12 11:18:57,217   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.dim.num_conv: 2
+2025-07-12 11:18:57,217   INFO  ----------- rot -----------
+2025-07-12 11:18:57,217   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.rot.out_channels: 2
+2025-07-12 11:18:57,217   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.rot.num_conv: 2
+2025-07-12 11:18:57,217   INFO  ----------- vel -----------
+2025-07-12 11:18:57,218   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.vel.out_channels: 2
+2025-07-12 11:18:57,218   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.vel.num_conv: 2
+2025-07-12 11:18:57,218   INFO  ----------- TARGET_ASSIGNER_CONFIG -----------
+2025-07-12 11:18:57,218   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.FEATURE_MAP_STRIDE: 8
+2025-07-12 11:18:57,218   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.NUM_MAX_OBJS: 500
+2025-07-12 11:18:57,218   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.GAUSSIAN_OVERLAP: 0.1
+2025-07-12 11:18:57,218   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.MIN_RADIUS: 2
+2025-07-12 11:18:57,218   INFO  ----------- LOSS_CONFIG -----------
+2025-07-12 11:18:57,218   INFO  ----------- LOSS_WEIGHTS -----------
+2025-07-12 11:18:57,218   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.cls_weight: 1.0
+2025-07-12 11:18:57,218   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.loc_weight: 0.25
+2025-07-12 11:18:57,218   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.code_weights: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.2, 0.2, 1.0, 1.0]
+2025-07-12 11:18:57,218   INFO  ----------- POST_PROCESSING -----------
+2025-07-12 11:18:57,218   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.SCORE_THRESH: 0.1
+2025-07-12 11:18:57,218   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.POST_CENTER_LIMIT_RANGE: [-61.2, -61.2, -10.0, 61.2, 61.2, 10.0]
+2025-07-12 11:18:57,218   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.MAX_OBJ_PER_SAMPLE: 500
+2025-07-12 11:18:57,218   INFO  ----------- NMS_CONFIG -----------
+2025-07-12 11:18:57,218   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.NMS_CONFIG.NMS_TYPE: nms_gpu
+2025-07-12 11:18:57,218   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.NMS_CONFIG.NMS_THRESH: 0.2
+2025-07-12 11:18:57,218   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.NMS_CONFIG.NMS_PRE_MAXSIZE: 1000
+2025-07-12 11:18:57,218   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.NMS_CONFIG.NMS_POST_MAXSIZE: 83
+2025-07-12 11:18:57,218   INFO  ----------- POST_PROCESSING -----------
+2025-07-12 11:18:57,218   INFO  cfg.MODEL.POST_PROCESSING.RECALL_THRESH_LIST: [0.3, 0.5, 0.7]
+2025-07-12 11:18:57,218   INFO  cfg.MODEL.POST_PROCESSING.EVAL_METRIC: kitti
+2025-07-12 11:18:57,218   INFO  ----------- OPTIMIZATION -----------
+2025-07-12 11:18:57,218   INFO  cfg.OPTIMIZATION.BATCH_SIZE_PER_GPU: 4
+2025-07-12 11:18:57,218   INFO  cfg.OPTIMIZATION.NUM_EPOCHS: 20
+2025-07-12 11:18:57,218   INFO  cfg.OPTIMIZATION.OPTIMIZER: adam_onecycle
+2025-07-12 11:18:57,218   INFO  cfg.OPTIMIZATION.LR: 0.003
+2025-07-12 11:18:57,218   INFO  cfg.OPTIMIZATION.WEIGHT_DECAY: 0.01
+2025-07-12 11:18:57,218   INFO  cfg.OPTIMIZATION.MOMENTUM: 0.9
+2025-07-12 11:18:57,218   INFO  cfg.OPTIMIZATION.MOMS: [0.95, 0.85]
+2025-07-12 11:18:57,218   INFO  cfg.OPTIMIZATION.PCT_START: 0.4
+2025-07-12 11:18:57,218   INFO  cfg.OPTIMIZATION.DIV_FACTOR: 10
+2025-07-12 11:18:57,219   INFO  cfg.OPTIMIZATION.DECAY_STEP_LIST: [35, 45]
+2025-07-12 11:18:57,219   INFO  cfg.OPTIMIZATION.LR_DECAY: 0.1
+2025-07-12 11:18:57,219   INFO  cfg.OPTIMIZATION.LR_CLIP: 1e-07
+2025-07-12 11:18:57,219   INFO  cfg.OPTIMIZATION.LR_WARMUP: False
+2025-07-12 11:18:57,219   INFO  cfg.OPTIMIZATION.WARMUP_EPOCH: 1
+2025-07-12 11:18:57,219   INFO  cfg.OPTIMIZATION.GRAD_NORM_CLIP: 10
+2025-07-12 11:18:57,219   INFO  cfg.TAG: cbgs_voxel0075_voxelnext
+2025-07-12 11:18:57,219   INFO  cfg.EXP_GROUP_PATH: cfgs/nuscenes_models
+2025-07-12 11:18:57,219   INFO  Loading NuScenes dataset
+2025-07-12 11:18:57,226   INFO  Total samples for NuScenes dataset: 81
+2025-07-12 11:18:58,935   INFO  ==> Loading parameters from checkpoint /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/ckpt/checkpoint_epoch_1.pth to GPU
+2025-07-12 11:18:59,043   INFO  ==> Checkpoint trained from version: pcdet+0.6.0+8caccce
+2025-07-12 11:18:59,086   INFO  ==> Done (loaded 542/542)
+2025-07-12 11:18:59,100   INFO  *************** EPOCH 1 EVALUATION *****************
+2025-07-12 11:19:11,066   INFO  *************** Performance of EPOCH 1 *****************
+2025-07-12 11:19:11,066   INFO  Generate label finished(sec_per_example: 0.1477 second).
+2025-07-12 11:19:11,066   INFO  recall_roi_0.3: 0.000000
+2025-07-12 11:19:11,066   INFO  recall_rcnn_0.3: 0.161646
+2025-07-12 11:19:11,066   INFO  recall_roi_0.5: 0.000000
+2025-07-12 11:19:11,066   INFO  recall_rcnn_0.5: 0.015600
+2025-07-12 11:19:11,066   INFO  recall_roi_0.7: 0.000000
+2025-07-12 11:19:11,066   INFO  recall_rcnn_0.7: 0.000000
+2025-07-12 11:19:11,066   INFO  Average predicted number of objects(81 samples): 196.074
+2025-07-12 11:19:14,976   INFO  The predictions of NuScenes have been saved to /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/eval/eval_all_default/default/epoch_1/val/final_result/data/results_nusc.json
+2025-07-12 11:19:18,473   INFO  ----------------Nuscene detection_cvpr_2019 results-----------------
+***car error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.78, 0.24, 1.57, 0.53, 0.25 | 0.12, 12.43, 29.95, 34.94 | mean AP: 0.19360738626718044
+***truck error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.27, 0.29, 1.23, 0.16, 0.19 | 0.00, 0.00, 0.07, 0.21 | mean AP: 0.0007039809745987998
+***construction_vehicle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***bus error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***trailer error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***barrier error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, nan, nan | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***motorcycle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***bicycle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.83, 0.40, 1.14, 5.25, 0.45 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***pedestrian error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.38, 0.40, 1.61, 1.13, 0.69 | 16.74, 24.58, 26.03, 29.38 | mean AP: 0.2418241886858358
+***traffic_cone error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.78, 0.60, nan, nan, nan | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+--------------average performance-------------
+trans_err:	 0.9042
+scale_err:	 0.6915
+orient_err:	 1.1713
+vel_err:	 1.3826
+attr_err:	 0.6973
+mAP:	 0.0436
+NDS:	 0.0925
+
+2025-07-12 11:19:18,474   INFO  Result is saved to /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/eval/eval_all_default/default/epoch_1/val
+2025-07-12 11:19:18,474   INFO  ****************Evaluation done.*****************
+2025-07-12 11:19:18,478   INFO  Epoch 1 has been evaluated
+2025-07-12 11:19:18,478   INFO  ==> Loading parameters from checkpoint /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/ckpt/checkpoint_epoch_2.pth to GPU
+2025-07-12 11:19:18,586   INFO  ==> Checkpoint trained from version: pcdet+0.6.0+8caccce
+2025-07-12 11:19:18,624   INFO  ==> Done (loaded 542/542)
+2025-07-12 11:19:18,628   INFO  *************** EPOCH 2 EVALUATION *****************
+2025-07-12 11:19:28,537   INFO  *************** Performance of EPOCH 2 *****************
+2025-07-12 11:19:28,537   INFO  Generate label finished(sec_per_example: 0.1223 second).
+2025-07-12 11:19:28,537   INFO  recall_roi_0.3: 0.000000
+2025-07-12 11:19:28,537   INFO  recall_rcnn_0.3: 0.281065
+2025-07-12 11:19:28,537   INFO  recall_roi_0.5: 0.000000
+2025-07-12 11:19:28,537   INFO  recall_rcnn_0.5: 0.035772
+2025-07-12 11:19:28,537   INFO  recall_roi_0.7: 0.000000
+2025-07-12 11:19:28,538   INFO  recall_rcnn_0.7: 0.000538
+2025-07-12 11:19:28,538   INFO  Average predicted number of objects(81 samples): 352.938
+2025-07-12 11:19:33,490   INFO  The predictions of NuScenes have been saved to /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/eval/eval_all_default/default/epoch_2/val/final_result/data/results_nusc.json
+2025-07-12 11:19:38,850   INFO  ----------------Nuscene detection_cvpr_2019 results-----------------
+***car error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.65, 0.23, 1.63, 0.48, 0.19 | 4.07, 24.79, 43.16, 49.49 | mean AP: 0.3037730853559442
+***truck error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.67, 0.24, 1.18, 0.16, 0.03 | 0.00, 1.28, 1.75, 3.15 | mean AP: 0.015451623798157812
+***construction_vehicle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***bus error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.10, 0.36, 2.61, 3.05, 0.87 | 0.00, 0.00, 0.00, 0.37 | mean AP: 0.0009150904638370761
+***trailer error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***barrier error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, nan, nan | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***motorcycle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.64, 0.43, 1.53, 0.14, 0.13 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***bicycle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***pedestrian error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.36, 0.52, 1.68, 1.11, 0.26 | 40.72, 54.88, 59.53, 65.47 | mean AP: 0.5515163708215264
+***traffic_cone error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, nan, nan, nan | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+--------------average performance-------------
+trans_err:	 0.8434
+scale_err:	 0.6784
+orient_err:	 1.4023
+vel_err:	 0.9921
+attr_err:	 0.5600
+mAP:	 0.0872
+NDS:	 0.1362
+
+2025-07-12 11:19:38,850   INFO  Result is saved to /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/eval/eval_all_default/default/epoch_2/val
+2025-07-12 11:19:38,850   INFO  ****************Evaluation done.*****************
+2025-07-12 11:19:38,855   INFO  Epoch 2 has been evaluated
+2025-07-12 11:19:38,855   INFO  ==> Loading parameters from checkpoint /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/ckpt/checkpoint_epoch_3.pth to GPU
+2025-07-12 11:19:38,930   INFO  ==> Checkpoint trained from version: pcdet+0.6.0+8caccce
+2025-07-12 11:19:38,965   INFO  ==> Done (loaded 542/542)
+2025-07-12 11:19:38,969   INFO  *************** EPOCH 3 EVALUATION *****************
+2025-07-12 11:19:49,074   INFO  *************** Performance of EPOCH 3 *****************
+2025-07-12 11:19:49,074   INFO  Generate label finished(sec_per_example: 0.1247 second).
+2025-07-12 11:19:49,074   INFO  recall_roi_0.3: 0.000000
+2025-07-12 11:19:49,074   INFO  recall_rcnn_0.3: 0.321409
+2025-07-12 11:19:49,074   INFO  recall_roi_0.5: 0.000000
+2025-07-12 11:19:49,074   INFO  recall_rcnn_0.5: 0.058096
+2025-07-12 11:19:49,074   INFO  recall_roi_0.7: 0.000000
+2025-07-12 11:19:49,074   INFO  recall_rcnn_0.7: 0.003228
+2025-07-12 11:19:49,074   INFO  Average predicted number of objects(81 samples): 276.235
+2025-07-12 11:19:53,330   INFO  The predictions of NuScenes have been saved to /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/eval/eval_all_default/default/epoch_3/val/final_result/data/results_nusc.json
+2025-07-12 11:19:57,930   INFO  ----------------Nuscene detection_cvpr_2019 results-----------------
+***car error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.53, 0.24, 1.51, 0.33, 0.16 | 13.31, 37.82, 56.92, 63.59 | mean AP: 0.429109793127697
+***truck error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.64, 0.19, 1.55, 0.60, 0.08 | 0.07, 2.66, 5.37, 5.37 | mean AP: 0.033658686604288654
+***construction_vehicle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***bus error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.06, 0.23, 2.39, 3.80, 0.90 | 0.00, 0.33, 3.89, 39.95 | mean AP: 0.11044294874379738
+***trailer error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***barrier error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, nan, nan | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***motorcycle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.37, 0.34, 1.52, 0.13, 0.05 | 0.10, 0.27, 0.27, 0.59 | mean AP: 0.0030903051914158083
+***bicycle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***pedestrian error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.36, 0.38, 1.61, 0.95, 0.24 | 50.55, 64.29, 68.19, 74.82 | mean AP: 0.6446360692143557
+***traffic_cone error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.73, 0.74, nan, nan, nan | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+--------------average performance-------------
+trans_err:	 0.7693
+scale_err:	 0.6132
+orient_err:	 1.3977
+vel_err:	 1.0991
+attr_err:	 0.5547
+mAP:	 0.1221
+NDS:	 0.1673
+
+2025-07-12 11:19:57,930   INFO  Result is saved to /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/eval/eval_all_default/default/epoch_3/val
+2025-07-12 11:19:57,931   INFO  ****************Evaluation done.*****************
+2025-07-12 11:19:57,935   INFO  Epoch 3 has been evaluated
+2025-07-12 11:19:57,936   INFO  ==> Loading parameters from checkpoint /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/ckpt/checkpoint_epoch_4.pth to GPU
+2025-07-12 11:19:58,033   INFO  ==> Checkpoint trained from version: pcdet+0.6.0+8caccce
+2025-07-12 11:19:58,069   INFO  ==> Done (loaded 542/542)
+2025-07-12 11:19:58,076   INFO  *************** EPOCH 4 EVALUATION *****************
+2025-07-12 11:20:08,611   INFO  *************** Performance of EPOCH 4 *****************
+2025-07-12 11:20:08,611   INFO  Generate label finished(sec_per_example: 0.1300 second).
+2025-07-12 11:20:08,611   INFO  recall_roi_0.3: 0.000000
+2025-07-12 11:20:08,611   INFO  recall_rcnn_0.3: 0.375740
+2025-07-12 11:20:08,612   INFO  recall_roi_0.5: 0.000000
+2025-07-12 11:20:08,612   INFO  recall_rcnn_0.5: 0.086875
+2025-07-12 11:20:08,612   INFO  recall_roi_0.7: 0.000000
+2025-07-12 11:20:08,612   INFO  recall_rcnn_0.7: 0.004034
+2025-07-12 11:20:08,612   INFO  Average predicted number of objects(81 samples): 358.568
+2025-07-12 11:20:14,287   INFO  The predictions of NuScenes have been saved to /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/eval/eval_all_default/default/epoch_4/val/final_result/data/results_nusc.json
+2025-07-12 11:20:19,404   INFO  ----------------Nuscene detection_cvpr_2019 results-----------------
+***car error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.50, 0.24, 1.35, 0.32, 0.15 | 18.15, 41.23, 61.38, 67.51 | mean AP: 0.4706827941993599
+***truck error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.64, 0.31, 1.59, 0.23, 0.02 | 2.22, 5.15, 6.69, 10.80 | mean AP: 0.062171922126499
+***construction_vehicle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***bus error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.96, 0.22, 1.31, 0.97, 0.81 | 0.00, 0.68, 4.86, 5.23 | mean AP: 0.026945945203577903
+***trailer error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***barrier error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, nan, nan | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***motorcycle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.42, 0.36, 1.43, 0.21, 0.35 | 1.29, 2.56, 2.66, 4.69 | mean AP: 0.028005343243923154
+***bicycle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***pedestrian error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.36, 0.33, 1.69, 0.91, 0.23 | 53.17, 64.78, 67.52, 73.33 | mean AP: 0.6469901544519595
+***traffic_cone error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.44, 0.70, nan, nan, nan | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+--------------average performance-------------
+trans_err:	 0.7317
+scale_err:	 0.6153
+orient_err:	 1.2641
+vel_err:	 0.7045
+attr_err:	 0.5695
+mAP:	 0.1235
+NDS:	 0.1996
+
+2025-07-12 11:20:19,405   INFO  Result is saved to /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/eval/eval_all_default/default/epoch_4/val
+2025-07-12 11:20:19,405   INFO  ****************Evaluation done.*****************
+2025-07-12 11:20:19,410   INFO  Epoch 4 has been evaluated
+2025-07-12 11:20:19,411   INFO  ==> Loading parameters from checkpoint /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/ckpt/checkpoint_epoch_5.pth to GPU
+2025-07-12 11:20:19,488   INFO  ==> Checkpoint trained from version: pcdet+0.6.0+8caccce
+2025-07-12 11:20:19,524   INFO  ==> Done (loaded 542/542)
+2025-07-12 11:20:19,529   INFO  *************** EPOCH 5 EVALUATION *****************
+2025-07-12 11:20:29,631   INFO  *************** Performance of EPOCH 5 *****************
+2025-07-12 11:20:29,631   INFO  Generate label finished(sec_per_example: 0.1247 second).
+2025-07-12 11:20:29,631   INFO  recall_roi_0.3: 0.000000
+2025-07-12 11:20:29,631   INFO  recall_rcnn_0.3: 0.355568
+2025-07-12 11:20:29,631   INFO  recall_roi_0.5: 0.000000
+2025-07-12 11:20:29,631   INFO  recall_rcnn_0.5: 0.086337
+2025-07-12 11:20:29,631   INFO  recall_roi_0.7: 0.000000
+2025-07-12 11:20:29,631   INFO  recall_rcnn_0.7: 0.007800
+2025-07-12 11:20:29,631   INFO  Average predicted number of objects(81 samples): 273.296
+2025-07-12 11:20:33,799   INFO  The predictions of NuScenes have been saved to /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/eval/eval_all_default/default/epoch_5/val/final_result/data/results_nusc.json
+2025-07-12 11:20:38,468   INFO  ----------------Nuscene detection_cvpr_2019 results-----------------
+***car error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.40, 0.21, 1.43, 0.22, 0.13 | 31.57, 52.04, 66.71, 71.62 | mean AP: 0.5548513154810255
+***truck error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.40, 0.25, 1.63, 0.09, 0.01 | 6.97, 13.55, 15.25, 15.46 | mean AP: 0.12808861277354708
+***construction_vehicle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***bus error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.78, 0.34, 2.71, 2.88, 0.97 | 0.07, 0.83, 7.45, 49.04 | mean AP: 0.14348532438474268
+***trailer error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***barrier error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, nan, nan | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***motorcycle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.33, 0.37, 1.63, 0.21, 0.29 | 3.74, 5.76, 5.77, 7.91 | mean AP: 0.05795807444664071
+***bicycle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***pedestrian error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.35, 0.29, 1.75, 0.97, 0.18 | 56.98, 67.11, 70.35, 76.28 | mean AP: 0.676838415850766
+***traffic_cone error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.33, 0.68, nan, nan, nan | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+--------------average performance-------------
+trans_err:	 0.6586
+scale_err:	 0.6139
+orient_err:	 1.4601
+vel_err:	 0.9212
+attr_err:	 0.5720
+mAP:	 0.1561
+NDS:	 0.2015
+
+2025-07-12 11:20:38,469   INFO  Result is saved to /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/eval/eval_all_default/default/epoch_5/val
+2025-07-12 11:20:38,469   INFO  ****************Evaluation done.*****************
+2025-07-12 11:20:38,473   INFO  Epoch 5 has been evaluated
+2025-07-12 11:20:38,474   INFO  ==> Loading parameters from checkpoint /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/ckpt/checkpoint_epoch_6.pth to GPU
+2025-07-12 11:20:38,546   INFO  ==> Checkpoint trained from version: pcdet+0.6.0+8caccce
+2025-07-12 11:20:38,582   INFO  ==> Done (loaded 542/542)
+2025-07-12 11:20:38,586   INFO  *************** EPOCH 6 EVALUATION *****************
+2025-07-12 11:20:48,800   INFO  *************** Performance of EPOCH 6 *****************
+2025-07-12 11:20:48,800   INFO  Generate label finished(sec_per_example: 0.1261 second).
+2025-07-12 11:20:48,800   INFO  recall_roi_0.3: 0.000000
+2025-07-12 11:20:48,801   INFO  recall_rcnn_0.3: 0.381926
+2025-07-12 11:20:48,801   INFO  recall_roi_0.5: 0.000000
+2025-07-12 11:20:48,801   INFO  recall_rcnn_0.5: 0.075578
+2025-07-12 11:20:48,801   INFO  recall_roi_0.7: 0.000000
+2025-07-12 11:20:48,801   INFO  recall_rcnn_0.7: 0.003228
+2025-07-12 11:20:48,801   INFO  Average predicted number of objects(81 samples): 323.802
+2025-07-12 11:20:53,631   INFO  The predictions of NuScenes have been saved to /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/eval/eval_all_default/default/epoch_6/val/final_result/data/results_nusc.json
+2025-07-12 11:20:58,481   INFO  ----------------Nuscene detection_cvpr_2019 results-----------------
+***car error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.39, 0.19, 1.32, 0.26, 0.13 | 32.83, 50.86, 65.83, 71.20 | mean AP: 0.5517843578220304
+***truck error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.47, 0.30, 1.98, 0.11, 0.00 | 7.89, 16.96, 18.65, 19.34 | mean AP: 0.1571175748910108
+***construction_vehicle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***bus error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.90, 0.27, 2.62, 1.48, 0.81 | 0.00, 11.34, 14.42, 17.78 | mean AP: 0.10882372982131942
+***trailer error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***barrier error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, nan, nan | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***motorcycle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.40, 0.34, 1.64, 0.29, 0.16 | 0.00, 0.00, 0.04, 0.43 | mean AP: 0.0011924874374028445
+***bicycle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.49, 0.29, 2.15, 0.05, 0.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***pedestrian error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.35, 0.29, 1.68, 0.99, 0.24 | 55.03, 66.42, 70.15, 75.84 | mean AP: 0.6685956957374917
+***traffic_cone error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.30, 0.44, nan, nan, nan | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+--------------average performance-------------
+trans_err:	 0.6306
+scale_err:	 0.5127
+orient_err:	 1.5970
+vel_err:	 0.6483
+attr_err:	 0.4174
+mAP:	 0.1488
+NDS:	 0.2535
+
+2025-07-12 11:20:58,482   INFO  Result is saved to /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/eval/eval_all_default/default/epoch_6/val
+2025-07-12 11:20:58,482   INFO  ****************Evaluation done.*****************
+2025-07-12 11:20:58,486   INFO  Epoch 6 has been evaluated
+2025-07-12 11:20:58,487   INFO  ==> Loading parameters from checkpoint /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/ckpt/checkpoint_epoch_7.pth to GPU
+2025-07-12 11:20:58,577   INFO  ==> Checkpoint trained from version: pcdet+0.6.0+8caccce
+2025-07-12 11:20:58,625   INFO  ==> Done (loaded 542/542)
+2025-07-12 11:20:58,630   INFO  *************** EPOCH 7 EVALUATION *****************
+2025-07-12 11:21:08,983   INFO  *************** Performance of EPOCH 7 *****************
+2025-07-12 11:21:08,984   INFO  Generate label finished(sec_per_example: 0.1278 second).
+2025-07-12 11:21:08,984   INFO  recall_roi_0.3: 0.000000
+2025-07-12 11:21:08,984   INFO  recall_rcnn_0.3: 0.446746
+2025-07-12 11:21:08,984   INFO  recall_roi_0.5: 0.000000
+2025-07-12 11:21:08,984   INFO  recall_rcnn_0.5: 0.108392
+2025-07-12 11:21:08,984   INFO  recall_roi_0.7: 0.000000
+2025-07-12 11:21:08,984   INFO  recall_rcnn_0.7: 0.006186
+2025-07-12 11:21:08,984   INFO  Average predicted number of objects(81 samples): 205.173
+2025-07-12 11:21:12,353   INFO  The predictions of NuScenes have been saved to /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/eval/eval_all_default/default/epoch_7/val/final_result/data/results_nusc.json
+2025-07-12 11:21:16,094   INFO  ----------------Nuscene detection_cvpr_2019 results-----------------
+***car error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.38, 0.27, 1.29, 0.26, 0.21 | 31.01, 50.57, 63.69, 69.06 | mean AP: 0.5357931881474642
+***truck error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.59, 0.22, 1.57, 0.40, 0.05 | 0.00, 0.07, 0.51, 1.08 | mean AP: 0.004145335363443206
+***construction_vehicle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***bus error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.89, 0.20, 2.58, 2.32, 0.89 | 0.01, 10.79, 30.88, 52.53 | mean AP: 0.23552741284545609
+***trailer error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***barrier error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, nan, nan | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***motorcycle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.33, 0.37, 1.72, 0.50, 0.63 | 14.63, 16.15, 17.28, 19.88 | mean AP: 0.16986492343106302
+***bicycle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***pedestrian error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.34, 0.31, 1.57, 0.94, 0.20 | 60.50, 70.69, 73.58, 79.07 | mean AP: 0.7095831673401829
+***traffic_cone error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.30, 0.53, nan, nan, nan | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+--------------average performance-------------
+trans_err:	 0.6825
+scale_err:	 0.5906
+orient_err:	 1.4154
+vel_err:	 0.9286
+attr_err:	 0.6214
+mAP:	 0.1655
+NDS:	 0.2004
+
+2025-07-12 11:21:16,095   INFO  Result is saved to /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/eval/eval_all_default/default/epoch_7/val
+2025-07-12 11:21:16,095   INFO  ****************Evaluation done.*****************
+2025-07-12 11:21:16,100   INFO  Epoch 7 has been evaluated
+2025-07-12 11:21:16,101   INFO  ==> Loading parameters from checkpoint /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/ckpt/checkpoint_epoch_8.pth to GPU
+2025-07-12 11:21:16,174   INFO  ==> Checkpoint trained from version: pcdet+0.6.0+8caccce
+2025-07-12 11:21:16,210   INFO  ==> Done (loaded 542/542)
+2025-07-12 11:21:16,214   INFO  *************** EPOCH 8 EVALUATION *****************
+2025-07-12 11:21:26,566   INFO  *************** Performance of EPOCH 8 *****************
+2025-07-12 11:21:26,566   INFO  Generate label finished(sec_per_example: 0.1278 second).
+2025-07-12 11:21:26,566   INFO  recall_roi_0.3: 0.000000
+2025-07-12 11:21:26,566   INFO  recall_rcnn_0.3: 0.405594
+2025-07-12 11:21:26,567   INFO  recall_roi_0.5: 0.000000
+2025-07-12 11:21:26,567   INFO  recall_rcnn_0.5: 0.082302
+2025-07-12 11:21:26,567   INFO  recall_roi_0.7: 0.000000
+2025-07-12 11:21:26,567   INFO  recall_rcnn_0.7: 0.003228
+2025-07-12 11:21:26,567   INFO  Average predicted number of objects(81 samples): 236.346
+2025-07-12 11:21:30,352   INFO  The predictions of NuScenes have been saved to /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/eval/eval_all_default/default/epoch_8/val/final_result/data/results_nusc.json
+2025-07-12 11:21:34,433   INFO  ----------------Nuscene detection_cvpr_2019 results-----------------
+***car error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.38, 0.25, 1.20, 0.25, 0.20 | 35.34, 56.26, 71.87, 76.84 | mean AP: 0.6007630098296028
+***truck error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.38, 0.26, 1.69, 0.15, 0.01 | 0.00, 0.00, 0.05, 0.05 | mean AP: 0.00026912483699187184
+***construction_vehicle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***bus error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.05, 0.28, 1.23, 2.85, 0.97 | 0.07, 1.29, 13.45, 33.49 | mean AP: 0.12075451695161689
+***trailer error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***barrier error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, nan, nan | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***motorcycle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.32, 0.33, 1.82, 0.18, 0.14 | 3.87, 4.78, 5.04, 6.09 | mean AP: 0.04944106587913585
+***bicycle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***pedestrian error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.33, 0.29, 1.72, 1.07, 0.19 | 55.35, 67.02, 69.56, 75.79 | mean AP: 0.6693031215721684
+***traffic_cone error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.34, 0.51, nan, nan, nan | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+--------------average performance-------------
+trans_err:	 0.6788
+scale_err:	 0.5921
+orient_err:	 1.2963
+vel_err:	 0.9370
+attr_err:	 0.5629
+mAP:	 0.1441
+NDS:	 0.1949
+
+2025-07-12 11:21:34,434   INFO  Result is saved to /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/eval/eval_all_default/default/epoch_8/val
+2025-07-12 11:21:34,434   INFO  ****************Evaluation done.*****************
+2025-07-12 11:21:34,438   INFO  Epoch 8 has been evaluated
+2025-07-12 11:21:34,439   INFO  ==> Loading parameters from checkpoint /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/ckpt/checkpoint_epoch_9.pth to GPU
+2025-07-12 11:21:34,523   INFO  ==> Checkpoint trained from version: pcdet+0.6.0+8caccce
+2025-07-12 11:21:34,560   INFO  ==> Done (loaded 542/542)
+2025-07-12 11:21:34,570   INFO  *************** EPOCH 9 EVALUATION *****************
+2025-07-12 11:21:44,150   INFO  *************** Performance of EPOCH 9 *****************
+2025-07-12 11:21:44,150   INFO  Generate label finished(sec_per_example: 0.1183 second).
+2025-07-12 11:21:44,150   INFO  recall_roi_0.3: 0.000000
+2025-07-12 11:21:44,150   INFO  recall_rcnn_0.3: 0.522055
+2025-07-12 11:21:44,150   INFO  recall_roi_0.5: 0.000000
+2025-07-12 11:21:44,151   INFO  recall_rcnn_0.5: 0.182087
+2025-07-12 11:21:44,151   INFO  recall_roi_0.7: 0.000000
+2025-07-12 11:21:44,151   INFO  recall_rcnn_0.7: 0.015062
+2025-07-12 11:21:44,151   INFO  Average predicted number of objects(81 samples): 307.037
+2025-07-12 11:21:48,650   INFO  The predictions of NuScenes have been saved to /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/eval/eval_all_default/default/epoch_9/val/final_result/data/results_nusc.json
+2025-07-12 11:21:53,075   INFO  ----------------Nuscene detection_cvpr_2019 results-----------------
+***car error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.38, 0.21, 1.17, 0.21, 0.13 | 36.13, 56.86, 72.33, 78.13 | mean AP: 0.6086118424983955
+***truck error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.40, 0.20, 1.72, 0.11, 0.01 | 2.86, 5.82, 6.38, 6.38 | mean AP: 0.05361276296149367
+***construction_vehicle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***bus error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.91, 0.22, 2.78, 2.28, 0.90 | 0.18, 7.58, 27.52, 38.75 | mean AP: 0.18506065261149363
+***trailer error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***barrier error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, nan, nan | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***motorcycle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.29, 0.35, 1.55, 0.33, 0.41 | 3.61, 4.64, 4.70, 7.37 | mean AP: 0.05078617650245415
+***bicycle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***pedestrian error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.33, 0.28, 1.58, 1.08, 0.16 | 53.00, 61.13, 63.36, 69.11 | mean AP: 0.6164624639329368
+***traffic_cone error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.23, 0.44, nan, nan, nan | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+--------------average performance-------------
+trans_err:	 0.6540
+scale_err:	 0.5706
+orient_err:	 1.4229
+vel_err:	 0.8760
+attr_err:	 0.5757
+mAP:	 0.1515
+NDS:	 0.2081
+
+2025-07-12 11:21:53,076   INFO  Result is saved to /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/eval/eval_all_default/default/epoch_9/val
+2025-07-12 11:21:53,076   INFO  ****************Evaluation done.*****************
+2025-07-12 11:21:53,080   INFO  Epoch 9 has been evaluated
+2025-07-12 11:21:53,081   INFO  ==> Loading parameters from checkpoint /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/ckpt/checkpoint_epoch_10.pth to GPU
+2025-07-12 11:21:53,163   INFO  ==> Checkpoint trained from version: pcdet+0.6.0+8caccce
+2025-07-12 11:21:53,199   INFO  ==> Done (loaded 542/542)
+2025-07-12 11:21:53,203   INFO  *************** EPOCH 10 EVALUATION *****************
+2025-07-12 11:22:03,477   INFO  *************** Performance of EPOCH 10 *****************
+2025-07-12 11:22:03,478   INFO  Generate label finished(sec_per_example: 0.1268 second).
+2025-07-12 11:22:03,478   INFO  recall_roi_0.3: 0.000000
+2025-07-12 11:22:03,478   INFO  recall_rcnn_0.3: 0.535772
+2025-07-12 11:22:03,478   INFO  recall_roi_0.5: 0.000000
+2025-07-12 11:22:03,478   INFO  recall_rcnn_0.5: 0.172405
+2025-07-12 11:22:03,478   INFO  recall_roi_0.7: 0.000000
+2025-07-12 11:22:03,478   INFO  recall_rcnn_0.7: 0.018020
+2025-07-12 11:22:03,478   INFO  Average predicted number of objects(81 samples): 315.753
+2025-07-12 11:22:08,116   INFO  The predictions of NuScenes have been saved to /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/eval/eval_all_default/default/epoch_10/val/final_result/data/results_nusc.json
+2025-07-12 11:22:12,978   INFO  ----------------Nuscene detection_cvpr_2019 results-----------------
+***car error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.38, 0.23, 1.25, 0.20, 0.13 | 36.07, 57.08, 71.68, 76.74 | mean AP: 0.603915667562247
+***truck error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.47, 0.32, 1.54, 0.06, 0.00 | 1.42, 6.53, 7.69, 9.93 | mean AP: 0.06391804094045421
+***construction_vehicle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***bus error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.75, 0.30, 1.88, 2.36, 0.89 | 0.00, 0.01, 0.47, 1.60 | mean AP: 0.005195914830076657
+***trailer error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***barrier error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, nan, nan | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***motorcycle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.34, 0.33, 1.69, 0.14, 0.13 | 4.82, 7.64, 7.96, 9.36 | mean AP: 0.07446029994549128
+***bicycle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.33, 0.32, 2.73, 0.10, 0.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***pedestrian error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.30, 0.30, 1.68, 0.81, 0.41 | 62.95, 74.25, 76.65, 81.58 | mean AP: 0.7385442373022779
+***traffic_cone error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.38, 0.49, nan, nan, nan | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+--------------average performance-------------
+trans_err:	 0.5961
+scale_err:	 0.5288
+orient_err:	 1.5292
+vel_err:	 0.7085
+attr_err:	 0.4455
+mAP:	 0.1486
+NDS:	 0.2464
+
+2025-07-12 11:22:12,978   INFO  Result is saved to /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/eval/eval_all_default/default/epoch_10/val
+2025-07-12 11:22:12,979   INFO  ****************Evaluation done.*****************
+2025-07-12 11:22:12,983   INFO  Epoch 10 has been evaluated
+2025-07-12 11:22:12,983   INFO  ==> Loading parameters from checkpoint /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/ckpt/checkpoint_epoch_11.pth to GPU
+2025-07-12 11:22:13,070   INFO  ==> Checkpoint trained from version: pcdet+0.6.0+8caccce
+2025-07-12 11:22:13,106   INFO  ==> Done (loaded 542/542)
+2025-07-12 11:22:13,110   INFO  *************** EPOCH 11 EVALUATION *****************
+2025-07-12 11:22:23,309   INFO  *************** Performance of EPOCH 11 *****************
+2025-07-12 11:22:23,309   INFO  Generate label finished(sec_per_example: 0.1259 second).
+2025-07-12 11:22:23,309   INFO  recall_roi_0.3: 0.000000
+2025-07-12 11:22:23,310   INFO  recall_rcnn_0.3: 0.518558
+2025-07-12 11:22:23,310   INFO  recall_roi_0.5: 0.000000
+2025-07-12 11:22:23,310   INFO  recall_rcnn_0.5: 0.183970
+2025-07-12 11:22:23,310   INFO  recall_roi_0.7: 0.000000
+2025-07-12 11:22:23,310   INFO  recall_rcnn_0.7: 0.016676
+2025-07-12 11:22:23,310   INFO  Average predicted number of objects(81 samples): 284.259
+2025-07-12 11:22:27,528   INFO  The predictions of NuScenes have been saved to /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/eval/eval_all_default/default/epoch_11/val/final_result/data/results_nusc.json
+2025-07-12 11:22:31,730   INFO  ----------------Nuscene detection_cvpr_2019 results-----------------
+***car error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.35, 0.23, 1.18, 0.18, 0.11 | 38.39, 56.22, 70.18, 75.11 | mean AP: 0.5997559628367154
+***truck error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.30, 0.19, 0.91, 0.09, 0.04 | 11.42, 18.27, 18.51, 18.57 | mean AP: 0.16691373859884517
+***construction_vehicle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***bus error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.72, 0.27, 0.78, 1.65, 0.89 | 0.13, 9.12, 9.79, 10.89 | mean AP: 0.07480692931156227
+***trailer error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***barrier error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, nan, nan | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***motorcycle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.21, 0.32, 1.92, 0.07, 0.03 | 9.38, 10.02, 10.06, 12.74 | mean AP: 0.10552356951007155
+***bicycle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***pedestrian error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.30, 0.31, 1.80, 0.70, 0.29 | 58.53, 69.71, 73.81, 79.40 | mean AP: 0.7036343398685592
+***traffic_cone error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.32, 0.55, nan, nan, nan | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+--------------average performance-------------
+trans_err:	 0.6211
+scale_err:	 0.5868
+orient_err:	 1.1777
+vel_err:	 0.7123
+attr_err:	 0.5454
+mAP:	 0.1651
+NDS:	 0.2360
+
+2025-07-12 11:22:31,730   INFO  Result is saved to /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/eval/eval_all_default/default/epoch_11/val
+2025-07-12 11:22:31,730   INFO  ****************Evaluation done.*****************
+2025-07-12 11:22:31,734   INFO  Epoch 11 has been evaluated
+2025-07-12 11:22:31,735   INFO  ==> Loading parameters from checkpoint /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/ckpt/checkpoint_epoch_12.pth to GPU
+2025-07-12 11:22:31,809   INFO  ==> Checkpoint trained from version: pcdet+0.6.0+8caccce
+2025-07-12 11:22:31,844   INFO  ==> Done (loaded 542/542)
+2025-07-12 11:22:31,848   INFO  *************** EPOCH 12 EVALUATION *****************
+2025-07-12 11:22:41,693   INFO  *************** Performance of EPOCH 12 *****************
+2025-07-12 11:22:41,693   INFO  Generate label finished(sec_per_example: 0.1215 second).
+2025-07-12 11:22:41,693   INFO  recall_roi_0.3: 0.000000
+2025-07-12 11:22:41,693   INFO  recall_rcnn_0.3: 0.508607
+2025-07-12 11:22:41,693   INFO  recall_roi_0.5: 0.000000
+2025-07-12 11:22:41,694   INFO  recall_rcnn_0.5: 0.191232
+2025-07-12 11:22:41,694   INFO  recall_roi_0.7: 0.000000
+2025-07-12 11:22:41,694   INFO  recall_rcnn_0.7: 0.030124
+2025-07-12 11:22:41,694   INFO  Average predicted number of objects(81 samples): 231.642
+2025-07-12 11:22:45,628   INFO  The predictions of NuScenes have been saved to /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/eval/eval_all_default/default/epoch_12/val/final_result/data/results_nusc.json
+2025-07-12 11:22:49,643   INFO  ----------------Nuscene detection_cvpr_2019 results-----------------
+***car error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.34, 0.21, 1.10, 0.62, 0.38 | 40.21, 58.42, 70.83, 75.50 | mean AP: 0.6124150104582877
+***truck error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.65, 0.26, 1.02, 0.34, 0.27 | 2.34, 2.57, 6.79, 8.09 | mean AP: 0.04948141800808368
+***construction_vehicle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***bus error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.75, 0.26, 2.22, 2.23, 0.74 | 0.36, 9.82, 15.10, 23.41 | mean AP: 0.12174805484021065
+***trailer error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***barrier error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, nan, nan | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***motorcycle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.27, 0.29, 1.73, 0.51, 0.40 | 0.59, 0.98, 1.13, 2.71 | mean AP: 0.013527090972323907
+***bicycle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.41, 0.40, 1.90, 0.21, 0.28 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***pedestrian error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.32, 0.31, 1.54, 0.93, 0.25 | 63.76, 74.75, 78.25, 82.47 | mean AP: 0.7480467062288458
+***traffic_cone error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.33, 0.51, nan, nan, nan | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+--------------average performance-------------
+trans_err:	 0.6066
+scale_err:	 0.5243
+orient_err:	 1.3905
+vel_err:	 0.8556
+attr_err:	 0.5391
+mAP:	 0.1545
+NDS:	 0.2247
+
+2025-07-12 11:22:49,644   INFO  Result is saved to /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/eval/eval_all_default/default/epoch_12/val
+2025-07-12 11:22:49,644   INFO  ****************Evaluation done.*****************
+2025-07-12 11:22:49,650   INFO  Epoch 12 has been evaluated
+2025-07-12 11:22:49,650   INFO  ==> Loading parameters from checkpoint /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/ckpt/checkpoint_epoch_13.pth to GPU
+2025-07-12 11:22:49,736   INFO  ==> Checkpoint trained from version: pcdet+0.6.0+8caccce
+2025-07-12 11:22:49,772   INFO  ==> Done (loaded 542/542)
+2025-07-12 11:22:49,777   INFO  *************** EPOCH 13 EVALUATION *****************
+2025-07-12 11:22:59,764   INFO  *************** Performance of EPOCH 13 *****************
+2025-07-12 11:22:59,764   INFO  Generate label finished(sec_per_example: 0.1233 second).
+2025-07-12 11:22:59,764   INFO  recall_roi_0.3: 0.000000
+2025-07-12 11:22:59,764   INFO  recall_rcnn_0.3: 0.518827
+2025-07-12 11:22:59,764   INFO  recall_roi_0.5: 0.000000
+2025-07-12 11:22:59,764   INFO  recall_rcnn_0.5: 0.207370
+2025-07-12 11:22:59,764   INFO  recall_roi_0.7: 0.000000
+2025-07-12 11:22:59,764   INFO  recall_rcnn_0.7: 0.022862
+2025-07-12 11:22:59,764   INFO  Average predicted number of objects(81 samples): 260.716
+2025-07-12 11:23:03,866   INFO  The predictions of NuScenes have been saved to /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/eval/eval_all_default/default/epoch_13/val/final_result/data/results_nusc.json
+2025-07-12 11:23:08,111   INFO  ----------------Nuscene detection_cvpr_2019 results-----------------
+***car error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.32, 0.21, 1.10, 0.20, 0.14 | 42.18, 59.52, 71.08, 75.22 | mean AP: 0.6200047488047131
+***truck error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.25, 0.21, 1.16, 0.09, 0.02 | 14.65, 15.40, 15.66, 16.03 | mean AP: 0.1543294960103251
+***construction_vehicle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***bus error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.74, 0.22, 1.39, 2.48, 0.72 | 3.18, 47.29, 57.06, 57.85 | mean AP: 0.4134691242787652
+***trailer error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***barrier error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, nan, nan | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***motorcycle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.24, 0.33, 1.50, 0.17, 0.17 | 0.56, 0.60, 0.67, 2.33 | mean AP: 0.010390696661560598
+***bicycle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.19, 0.38, 2.08, 0.12, 0.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***pedestrian error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.30, 0.26, 1.59, 0.82, 0.30 | 53.84, 59.51, 62.99, 68.09 | mean AP: 0.6110747659099238
+***traffic_cone error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.23, 0.46, nan, nan, nan | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+--------------average performance-------------
+trans_err:	 0.5266
+scale_err:	 0.5075
+orient_err:	 1.3140
+vel_err:	 0.7362
+attr_err:	 0.4199
+mAP:	 0.1809
+NDS:	 0.2714
+
+2025-07-12 11:23:08,111   INFO  Result is saved to /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/eval/eval_all_default/default/epoch_13/val
+2025-07-12 11:23:08,111   INFO  ****************Evaluation done.*****************
+2025-07-12 11:23:08,119   INFO  Epoch 13 has been evaluated
+2025-07-12 11:23:08,122   INFO  ==> Loading parameters from checkpoint /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/ckpt/checkpoint_epoch_14.pth to GPU
+2025-07-12 11:23:08,196   INFO  ==> Checkpoint trained from version: pcdet+0.6.0+8caccce
+2025-07-12 11:23:08,232   INFO  ==> Done (loaded 542/542)
+2025-07-12 11:23:08,237   INFO  *************** EPOCH 14 EVALUATION *****************
+2025-07-12 11:23:18,433   INFO  *************** Performance of EPOCH 14 *****************
+2025-07-12 11:23:18,434   INFO  Generate label finished(sec_per_example: 0.1259 second).
+2025-07-12 11:23:18,434   INFO  recall_roi_0.3: 0.000000
+2025-07-12 11:23:18,434   INFO  recall_rcnn_0.3: 0.521517
+2025-07-12 11:23:18,434   INFO  recall_roi_0.5: 0.000000
+2025-07-12 11:23:18,434   INFO  recall_rcnn_0.5: 0.190963
+2025-07-12 11:23:18,434   INFO  recall_roi_0.7: 0.000000
+2025-07-12 11:23:18,434   INFO  recall_rcnn_0.7: 0.018558
+2025-07-12 11:23:18,434   INFO  Average predicted number of objects(81 samples): 223.790
+2025-07-12 11:23:22,039   INFO  The predictions of NuScenes have been saved to /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/eval/eval_all_default/default/epoch_14/val/final_result/data/results_nusc.json
+2025-07-12 11:23:26,000   INFO  ----------------Nuscene detection_cvpr_2019 results-----------------
+***car error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.33, 0.22, 0.99, 0.18, 0.11 | 41.36, 59.83, 72.02, 75.82 | mean AP: 0.6225767208050335
+***truck error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.27, 0.22, 0.93, 0.08, 0.01 | 17.25, 26.57, 26.83, 27.89 | mean AP: 0.24633990713053686
+***construction_vehicle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***bus error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.88, 0.25, 0.89, 2.31, 0.30 | 2.43, 13.17, 32.22, 51.14 | mean AP: 0.24739337441311265
+***trailer error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***barrier error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, nan, nan | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***motorcycle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.25, 0.34, 1.81, 0.07, 0.01 | 0.00, 0.00, 0.00, 0.02 | mean AP: 6.100738847898626e-05
+***bicycle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.26, 0.41, 1.54, 0.06, 0.02 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***pedestrian error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.29, 0.30, 1.55, 0.77, 0.30 | 64.65, 74.64, 78.76, 83.35 | mean AP: 0.7534876423736587
+***traffic_cone error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.22, 0.49, nan, nan, nan | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+--------------average performance-------------
+trans_err:	 0.5500
+scale_err:	 0.5227
+orient_err:	 1.1897
+vel_err:	 0.6829
+attr_err:	 0.3445
+mAP:	 0.1870
+NDS:	 0.2835
+
+2025-07-12 11:23:26,000   INFO  Result is saved to /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/eval/eval_all_default/default/epoch_14/val
+2025-07-12 11:23:26,000   INFO  ****************Evaluation done.*****************
+2025-07-12 11:23:26,007   INFO  Epoch 14 has been evaluated
+2025-07-12 11:23:26,007   INFO  ==> Loading parameters from checkpoint /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/ckpt/checkpoint_epoch_15.pth to GPU
+2025-07-12 11:23:26,093   INFO  ==> Checkpoint trained from version: pcdet+0.6.0+8caccce
+2025-07-12 11:23:26,131   INFO  ==> Done (loaded 542/542)
+2025-07-12 11:23:26,136   INFO  *************** EPOCH 15 EVALUATION *****************
+2025-07-12 11:23:36,346   INFO  *************** Performance of EPOCH 15 *****************
+2025-07-12 11:23:36,346   INFO  Generate label finished(sec_per_example: 0.1260 second).
+2025-07-12 11:23:36,346   INFO  recall_roi_0.3: 0.000000
+2025-07-12 11:23:36,346   INFO  recall_rcnn_0.3: 0.519903
+2025-07-12 11:23:36,346   INFO  recall_roi_0.5: 0.000000
+2025-07-12 11:23:36,347   INFO  recall_rcnn_0.5: 0.191501
+2025-07-12 11:23:36,347   INFO  recall_roi_0.7: 0.000000
+2025-07-12 11:23:36,347   INFO  recall_rcnn_0.7: 0.019903
+2025-07-12 11:23:36,347   INFO  Average predicted number of objects(81 samples): 220.037
+2025-07-12 11:23:40,001   INFO  The predictions of NuScenes have been saved to /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/eval/eval_all_default/default/epoch_15/val/final_result/data/results_nusc.json
+2025-07-12 11:23:44,076   INFO  ----------------Nuscene detection_cvpr_2019 results-----------------
+***car error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.33, 0.23, 0.91, 0.19, 0.12 | 42.50, 62.39, 74.12, 78.61 | mean AP: 0.6440358915078197
+***truck error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.31, 0.33, 1.59, 0.07, 0.01 | 7.07, 9.40, 10.06, 10.46 | mean AP: 0.0924531000372081
+***construction_vehicle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***bus error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.75, 0.23, 1.19, 2.49, 0.75 | 0.09, 10.05, 16.98, 17.00 | mean AP: 0.1102931442053477
+***trailer error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***barrier error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, nan, nan | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***motorcycle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.20, 0.27, 1.67, 0.10, 0.03 | 2.31, 2.32, 2.32, 3.03 | mean AP: 0.02498242306172254
+***bicycle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***pedestrian error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.33, 0.29, 1.53, 1.15, 0.12 | 48.31, 56.02, 58.13, 65.48 | mean AP: 0.5698465056341748
+***traffic_cone error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.24, 0.54, nan, nan, nan | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+--------------average performance-------------
+trans_err:	 0.6154
+scale_err:	 0.5885
+orient_err:	 1.2095
+vel_err:	 0.8743
+attr_err:	 0.5049
+mAP:	 0.1442
+NDS:	 0.2138
+
+2025-07-12 11:23:44,077   INFO  Result is saved to /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/eval/eval_all_default/default/epoch_15/val
+2025-07-12 11:23:44,077   INFO  ****************Evaluation done.*****************
+2025-07-12 11:23:44,083   INFO  Epoch 15 has been evaluated
+2025-07-12 11:23:44,084   INFO  ==> Loading parameters from checkpoint /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/ckpt/checkpoint_epoch_16.pth to GPU
+2025-07-12 11:23:44,161   INFO  ==> Checkpoint trained from version: pcdet+0.6.0+8caccce
+2025-07-12 11:23:44,199   INFO  ==> Done (loaded 542/542)
+2025-07-12 11:23:44,207   INFO  *************** EPOCH 16 EVALUATION *****************
+2025-07-12 11:23:54,301   INFO  *************** Performance of EPOCH 16 *****************
+2025-07-12 11:23:54,302   INFO  Generate label finished(sec_per_example: 0.1246 second).
+2025-07-12 11:23:54,302   INFO  recall_roi_0.3: 0.000000
+2025-07-12 11:23:54,302   INFO  recall_rcnn_0.3: 0.547875
+2025-07-12 11:23:54,302   INFO  recall_roi_0.5: 0.000000
+2025-07-12 11:23:54,302   INFO  recall_rcnn_0.5: 0.239645
+2025-07-12 11:23:54,302   INFO  recall_roi_0.7: 0.000000
+2025-07-12 11:23:54,302   INFO  recall_rcnn_0.7: 0.022862
+2025-07-12 11:23:54,302   INFO  Average predicted number of objects(81 samples): 222.086
+2025-07-12 11:23:58,018   INFO  The predictions of NuScenes have been saved to /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/eval/eval_all_default/default/epoch_16/val/final_result/data/results_nusc.json
+2025-07-12 11:24:01,791   INFO  ----------------Nuscene detection_cvpr_2019 results-----------------
+***car error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.33, 0.22, 1.05, 0.21, 0.13 | 40.34, 57.92, 69.50, 74.00 | mean AP: 0.6044127645128675
+***truck error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.27, 0.27, 0.83, 0.19, 0.07 | 8.35, 9.61, 10.22, 10.27 | mean AP: 0.09613141920648519
+***construction_vehicle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***bus error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.87, 0.25, 0.78, 3.18, 0.40 | 0.00, 0.18, 5.65, 11.01 | mean AP: 0.04210245884337592
+***trailer error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***barrier error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, nan, nan | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***motorcycle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.27, 0.39, 1.59, 0.34, 0.17 | 6.83, 8.73, 9.27, 11.36 | mean AP: 0.0904632098888884
+***bicycle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.65, 0.50, 2.60, 0.64, 0.75 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***pedestrian error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.26, 0.30, 1.34, 0.71, 0.26 | 67.63, 73.30, 76.17, 80.55 | mean AP: 0.7441466615847717
+***traffic_cone error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.22, 0.55, nan, nan, nan | 0.00, 0.01, 0.01, 0.01 | mean AP: 7.613057056202715e-05
+--------------average performance-------------
+trans_err:	 0.5863
+scale_err:	 0.5476
+orient_err:	 1.2437
+vel_err:	 0.9093
+attr_err:	 0.4730
+mAP:	 0.1577
+NDS:	 0.2272
+
+2025-07-12 11:24:01,792   INFO  Result is saved to /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/eval/eval_all_default/default/epoch_16/val
+2025-07-12 11:24:01,792   INFO  ****************Evaluation done.*****************
+2025-07-12 11:24:01,797   INFO  Epoch 16 has been evaluated
+2025-07-12 11:24:01,798   INFO  ==> Loading parameters from checkpoint /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/ckpt/checkpoint_epoch_17.pth to GPU
+2025-07-12 11:24:01,881   INFO  ==> Checkpoint trained from version: pcdet+0.6.0+8caccce
+2025-07-12 11:24:01,917   INFO  ==> Done (loaded 542/542)
+2025-07-12 11:24:01,921   INFO  *************** EPOCH 17 EVALUATION *****************
+2025-07-12 11:24:11,934   INFO  *************** Performance of EPOCH 17 *****************
+2025-07-12 11:24:11,934   INFO  Generate label finished(sec_per_example: 0.1236 second).
+2025-07-12 11:24:11,934   INFO  recall_roi_0.3: 0.000000
+2025-07-12 11:24:11,935   INFO  recall_rcnn_0.3: 0.558903
+2025-07-12 11:24:11,935   INFO  recall_roi_0.5: 0.000000
+2025-07-12 11:24:11,935   INFO  recall_rcnn_0.5: 0.243410
+2025-07-12 11:24:11,935   INFO  recall_roi_0.7: 0.000000
+2025-07-12 11:24:11,935   INFO  recall_rcnn_0.7: 0.034696
+2025-07-12 11:24:11,935   INFO  Average predicted number of objects(81 samples): 264.901
+2025-07-12 11:24:16,164   INFO  The predictions of NuScenes have been saved to /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/eval/eval_all_default/default/epoch_17/val/final_result/data/results_nusc.json
+2025-07-12 11:24:20,385   INFO  ----------------Nuscene detection_cvpr_2019 results-----------------
+***car error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.33, 0.20, 0.99, 0.17, 0.12 | 41.54, 59.51, 72.78, 77.40 | mean AP: 0.6280760721873437
+***truck error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.24, 0.22, 0.99, 0.19, 0.20 | 24.06, 24.93, 26.28, 26.40 | mean AP: 0.2541723348219141
+***construction_vehicle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***bus error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.90, 0.26, 0.92, 3.34, 0.29 | 1.41, 10.75, 32.75, 35.84 | mean AP: 0.20186242968897194
+***trailer error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***barrier error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, nan, nan | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***motorcycle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.26, 0.34, 1.89, 0.16, 0.21 | 6.96, 8.15, 8.50, 9.62 | mean AP: 0.08308433283884281
+***bicycle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.27, 0.39, 1.45, 0.04, 0.03 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***pedestrian error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.27, 0.27, 1.30, 0.74, 0.20 | 66.25, 72.62, 75.36, 80.31 | mean AP: 0.7363692818725932
+***traffic_cone error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.20, 0.53, nan, nan, nan | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+--------------average performance-------------
+trans_err:	 0.5467
+scale_err:	 0.5199
+orient_err:	 1.1712
+vel_err:	 0.8306
+attr_err:	 0.3802
+mAP:	 0.1904
+NDS:	 0.2674
+
+2025-07-12 11:24:20,386   INFO  Result is saved to /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/eval/eval_all_default/default/epoch_17/val
+2025-07-12 11:24:20,386   INFO  ****************Evaluation done.*****************
+2025-07-12 11:24:20,392   INFO  Epoch 17 has been evaluated
+2025-07-12 11:24:20,392   INFO  ==> Loading parameters from checkpoint /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/ckpt/checkpoint_epoch_18.pth to GPU
+2025-07-12 11:24:20,472   INFO  ==> Checkpoint trained from version: pcdet+0.6.0+8caccce
+2025-07-12 11:24:20,513   INFO  ==> Done (loaded 542/542)
+2025-07-12 11:24:20,518   INFO  *************** EPOCH 18 EVALUATION *****************
+2025-07-12 11:24:30,542   INFO  *************** Performance of EPOCH 18 *****************
+2025-07-12 11:24:30,542   INFO  Generate label finished(sec_per_example: 0.1237 second).
+2025-07-12 11:24:30,543   INFO  recall_roi_0.3: 0.000000
+2025-07-12 11:24:30,543   INFO  recall_rcnn_0.3: 0.534696
+2025-07-12 11:24:30,543   INFO  recall_roi_0.5: 0.000000
+2025-07-12 11:24:30,543   INFO  recall_rcnn_0.5: 0.222162
+2025-07-12 11:24:30,543   INFO  recall_roi_0.7: 0.000000
+2025-07-12 11:24:30,543   INFO  recall_rcnn_0.7: 0.023400
+2025-07-12 11:24:30,543   INFO  Average predicted number of objects(81 samples): 262.457
+2025-07-12 11:24:34,833   INFO  The predictions of NuScenes have been saved to /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/eval/eval_all_default/default/epoch_18/val/final_result/data/results_nusc.json
+2025-07-12 11:24:38,763   INFO  ----------------Nuscene detection_cvpr_2019 results-----------------
+***car error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.35, 0.20, 1.04, 0.27, 0.13 | 39.85, 57.31, 69.96, 74.91 | mean AP: 0.6050638652969671
+***truck error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.26, 0.21, 0.80, 0.20, 0.09 | 5.71, 8.42, 8.60, 10.09 | mean AP: 0.08203785707295914
+***construction_vehicle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***bus error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.88, 0.27, 1.95, 2.57, 0.45 | 0.00, 4.09, 26.85, 37.82 | mean AP: 0.1719115698844606
+***trailer error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***barrier error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, nan, nan | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***motorcycle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.18, 0.34, 1.90, 0.06, 0.01 | 0.91, 1.00, 1.00, 1.08 | mean AP: 0.009958014181110373
+***bicycle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.48, 0.38, 1.18, 0.13, 0.13 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***pedestrian error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.26, 0.30, 1.19, 0.96, 0.12 | 60.03, 64.21, 66.52, 71.41 | mean AP: 0.6554279626000021
+***traffic_cone error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.17, 0.46, nan, nan, nan | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+--------------average performance-------------
+trans_err:	 0.5575
+scale_err:	 0.5160
+orient_err:	 1.2286
+vel_err:	 0.7732
+attr_err:	 0.3669
+mAP:	 0.1524
+NDS:	 0.2549
+
+2025-07-12 11:24:38,763   INFO  Result is saved to /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/eval/eval_all_default/default/epoch_18/val
+2025-07-12 11:24:38,763   INFO  ****************Evaluation done.*****************
+2025-07-12 11:24:38,768   INFO  Epoch 18 has been evaluated
+2025-07-12 11:24:38,769   INFO  ==> Loading parameters from checkpoint /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/ckpt/checkpoint_epoch_19.pth to GPU
+2025-07-12 11:24:38,842   INFO  ==> Checkpoint trained from version: pcdet+0.6.0+8caccce
+2025-07-12 11:24:38,878   INFO  ==> Done (loaded 542/542)
+2025-07-12 11:24:38,882   INFO  *************** EPOCH 19 EVALUATION *****************
+2025-07-12 11:24:48,740   INFO  *************** Performance of EPOCH 19 *****************
+2025-07-12 11:24:48,741   INFO  Generate label finished(sec_per_example: 0.1217 second).
+2025-07-12 11:24:48,741   INFO  recall_roi_0.3: 0.000000
+2025-07-12 11:24:48,741   INFO  recall_rcnn_0.3: 0.554330
+2025-07-12 11:24:48,741   INFO  recall_roi_0.5: 0.000000
+2025-07-12 11:24:48,741   INFO  recall_rcnn_0.5: 0.244486
+2025-07-12 11:24:48,741   INFO  recall_roi_0.7: 0.000000
+2025-07-12 11:24:48,741   INFO  recall_rcnn_0.7: 0.040613
+2025-07-12 11:24:48,741   INFO  Average predicted number of objects(81 samples): 222.259
+2025-07-12 11:24:52,387   INFO  The predictions of NuScenes have been saved to /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/eval/eval_all_default/default/epoch_19/val/final_result/data/results_nusc.json
+2025-07-12 11:24:56,152   INFO  ----------------Nuscene detection_cvpr_2019 results-----------------
+***car error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.31, 0.18, 0.95, 0.23, 0.14 | 43.96, 62.88, 75.16, 79.13 | mean AP: 0.6528299130663568
+***truck error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.35, 0.24, 1.21, 0.25, 0.26 | 14.77, 23.95, 24.73, 26.32 | mean AP: 0.22444951391879492
+***construction_vehicle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***bus error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.61, 0.24, 0.37, 1.92, 0.28 | 15.39, 40.67, 64.53, 75.17 | mean AP: 0.48938928862778697
+***trailer error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***barrier error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, nan, nan | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***motorcycle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.27, 0.36, 1.84, 0.20, 0.06 | 5.83, 5.99, 6.66, 7.80 | mean AP: 0.06568933778322292
+***bicycle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***pedestrian error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.22, 0.30, 1.20, 0.59, 0.16 | 69.58, 73.29, 75.89, 81.89 | mean AP: 0.751632781323465
+***traffic_cone error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.26, 0.49, nan, nan, nan | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+--------------average performance-------------
+trans_err:	 0.6017
+scale_err:	 0.5804
+orient_err:	 1.0624
+vel_err:	 0.7742
+attr_err:	 0.4867
+mAP:	 0.2184
+NDS:	 0.2649
+
+2025-07-12 11:24:56,152   INFO  Result is saved to /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/eval/eval_all_default/default/epoch_19/val
+2025-07-12 11:24:56,152   INFO  ****************Evaluation done.*****************
+2025-07-12 11:24:56,157   INFO  Epoch 19 has been evaluated
+2025-07-12 11:24:56,158   INFO  ==> Loading parameters from checkpoint /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/ckpt/checkpoint_epoch_20.pth to GPU
+2025-07-12 11:24:56,236   INFO  ==> Checkpoint trained from version: pcdet+0.6.0+8caccce
+2025-07-12 11:24:56,272   INFO  ==> Done (loaded 542/542)
+2025-07-12 11:24:56,276   INFO  *************** EPOCH 20 EVALUATION *****************
+2025-07-12 11:25:06,699   INFO  *************** Performance of EPOCH 20 *****************
+2025-07-12 11:25:06,699   INFO  Generate label finished(sec_per_example: 0.1287 second).
+2025-07-12 11:25:06,700   INFO  recall_roi_0.3: 0.000000
+2025-07-12 11:25:06,700   INFO  recall_rcnn_0.3: 0.568316
+2025-07-12 11:25:06,700   INFO  recall_roi_0.5: 0.000000
+2025-07-12 11:25:06,700   INFO  recall_rcnn_0.5: 0.248790
+2025-07-12 11:25:06,700   INFO  recall_roi_0.7: 0.000000
+2025-07-12 11:25:06,700   INFO  recall_rcnn_0.7: 0.027165
+2025-07-12 11:25:06,700   INFO  Average predicted number of objects(81 samples): 193.728
+2025-07-12 11:25:09,860   INFO  The predictions of NuScenes have been saved to /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/eval/eval_all_default/default/epoch_20/val/final_result/data/results_nusc.json
+2025-07-12 11:25:13,555   INFO  ----------------Nuscene detection_cvpr_2019 results-----------------
+***car error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.34, 0.24, 1.10, 0.19, 0.11 | 38.70, 60.19, 72.79, 76.18 | mean AP: 0.6196461441287893
+***truck error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.36, 0.23, 1.01, 0.11, 0.08 | 14.62, 19.28, 21.78, 23.30 | mean AP: 0.1974544804649181
+***construction_vehicle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***bus error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.58, 0.27, 0.24, 1.72, 0.10 | 3.23, 47.16, 65.47, 69.29 | mean AP: 0.4628832806337522
+***trailer error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***barrier error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, nan, nan | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***motorcycle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.28, 0.33, 1.66, 0.18, 0.15 | 1.70, 1.86, 2.29, 3.07 | mean AP: 0.022290754473691665
+***bicycle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***pedestrian error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.23, 0.25, 1.22, 0.44, 0.21 | 72.75, 77.46, 79.91, 84.42 | mean AP: 0.7863590200834432
+***traffic_cone error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.25, 0.49, nan, nan, nan | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+--------------average performance-------------
+trans_err:	 0.6041
+scale_err:	 0.5824
+orient_err:	 1.0254
+vel_err:	 0.7046
+attr_err:	 0.4566
+mAP:	 0.2089
+NDS:	 0.2697
+
+2025-07-12 11:25:13,555   INFO  Result is saved to /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/eval/eval_all_default/default/epoch_20/val
+2025-07-12 11:25:13,555   INFO  ****************Evaluation done.*****************
+2025-07-12 11:25:13,559   INFO  Epoch 20 has been evaluated
+2025-07-12 11:25:13,559   INFO  ==> Loading parameters from checkpoint /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/ckpt/checkpoint_epoch_21.pth to GPU
+2025-07-12 11:25:13,639   INFO  ==> Checkpoint trained from version: pcdet+0.6.0+8caccce
+2025-07-12 11:25:13,674   INFO  ==> Done (loaded 542/542)
+2025-07-12 11:25:13,679   INFO  *************** EPOCH 21 EVALUATION *****************
+2025-07-12 11:25:23,838   INFO  *************** Performance of EPOCH 21 *****************
+2025-07-12 11:25:23,838   INFO  Generate label finished(sec_per_example: 0.1254 second).
+2025-07-12 11:25:23,838   INFO  recall_roi_0.3: 0.000000
+2025-07-12 11:25:23,838   INFO  recall_rcnn_0.3: 0.590102
+2025-07-12 11:25:23,838   INFO  recall_roi_0.5: 0.000000
+2025-07-12 11:25:23,838   INFO  recall_rcnn_0.5: 0.269769
+2025-07-12 11:25:23,838   INFO  recall_roi_0.7: 0.000000
+2025-07-12 11:25:23,838   INFO  recall_rcnn_0.7: 0.046530
+2025-07-12 11:25:23,839   INFO  Average predicted number of objects(81 samples): 214.938
+2025-07-12 11:25:27,090   INFO  The predictions of NuScenes have been saved to /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/eval/eval_all_default/default/epoch_21/val/final_result/data/results_nusc.json
+2025-07-12 11:25:30,713   INFO  ----------------Nuscene detection_cvpr_2019 results-----------------
+***car error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.31, 0.19, 0.90, 0.21, 0.10 | 44.33, 61.73, 75.03, 79.44 | mean AP: 0.6513252868234709
+***truck error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.25, 0.24, 0.73, 0.14, 0.05 | 9.84, 12.25, 12.75, 12.79 | mean AP: 0.11909665493749585
+***construction_vehicle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***bus error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.71, 0.22, 0.60, 2.20, 0.22 | 5.49, 15.46, 30.09, 45.90 | mean AP: 0.2423321484311435
+***trailer error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***barrier error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, nan, nan | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***motorcycle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.17, 0.33, 1.37, 0.07, 0.05 | 1.01, 1.07, 1.07, 1.98 | mean AP: 0.012823598822706367
+***bicycle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.31, 0.42, 1.71, 0.02, 0.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***pedestrian error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.23, 0.27, 0.94, 0.43, 0.13 | 72.26, 76.09, 79.12, 83.87 | mean AP: 0.778336457658767
+***traffic_cone error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.19, 0.50, nan, nan, nan | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+--------------average performance-------------
+trans_err:	 0.5167
+scale_err:	 0.5174
+orient_err:	 1.0272
+vel_err:	 0.6327
+attr_err:	 0.3206
+mAP:	 0.1804
+NDS:	 0.2915
+
+2025-07-12 11:25:30,714   INFO  Result is saved to /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/eval/eval_all_default/default/epoch_21/val
+2025-07-12 11:25:30,714   INFO  ****************Evaluation done.*****************
+2025-07-12 11:25:30,717   INFO  Epoch 21 has been evaluated
+2025-07-12 11:25:30,718   INFO  ==> Loading parameters from checkpoint /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/ckpt/checkpoint_epoch_22.pth to GPU
+2025-07-12 11:25:30,796   INFO  ==> Checkpoint trained from version: pcdet+0.6.0+8caccce
+2025-07-12 11:25:30,832   INFO  ==> Done (loaded 542/542)
+2025-07-12 11:25:30,836   INFO  *************** EPOCH 22 EVALUATION *****************
+2025-07-12 11:25:41,486   INFO  *************** Performance of EPOCH 22 *****************
+2025-07-12 11:25:41,487   INFO  Generate label finished(sec_per_example: 0.1315 second).
+2025-07-12 11:25:41,487   INFO  recall_roi_0.3: 0.000000
+2025-07-12 11:25:41,488   INFO  recall_rcnn_0.3: 0.581764
+2025-07-12 11:25:41,488   INFO  recall_roi_0.5: 0.000000
+2025-07-12 11:25:41,488   INFO  recall_rcnn_0.5: 0.264658
+2025-07-12 11:25:41,488   INFO  recall_roi_0.7: 0.000000
+2025-07-12 11:25:41,489   INFO  recall_rcnn_0.7: 0.030931
+2025-07-12 11:25:41,489   INFO  Average predicted number of objects(81 samples): 284.086
+2025-07-12 11:25:45,760   INFO  The predictions of NuScenes have been saved to /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/eval/eval_all_default/default/epoch_22/val/final_result/data/results_nusc.json
+2025-07-12 11:25:50,183   INFO  ----------------Nuscene detection_cvpr_2019 results-----------------
+***car error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.31, 0.20, 0.96, 0.18, 0.11 | 43.54, 59.79, 72.82, 77.08 | mean AP: 0.633066796940003
+***truck error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.21, 0.23, 0.74, 0.25, 0.13 | 33.17, 33.17, 33.71, 34.09 | mean AP: 0.3353796804797956
+***construction_vehicle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***bus error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.48, 0.22, 0.34, 1.90, 0.29 | 7.43, 31.57, 39.04, 41.01 | mean AP: 0.2976394743196453
+***trailer error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***barrier error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, nan, nan | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***motorcycle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.22, 0.33, 1.55, 0.08, 0.05 | 4.84, 4.86, 5.04, 6.18 | mean AP: 0.05231185975732085
+***bicycle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.39, 0.35, 2.14, 0.10, 0.13 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***pedestrian error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.21, 0.28, 0.66, 0.36, 0.12 | 71.33, 75.02, 78.22, 84.55 | mean AP: 0.7727867778230538
+***traffic_cone error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.29, 0.47, nan, nan, nan | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+--------------average performance-------------
+trans_err:	 0.5109
+scale_err:	 0.5089
+orient_err:	 1.0422
+vel_err:	 0.6087
+attr_err:	 0.3532
+mAP:	 0.2091
+NDS:	 0.3064
+
+2025-07-12 11:25:50,183   INFO  Result is saved to /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/eval/eval_all_default/default/epoch_22/val
+2025-07-12 11:25:50,183   INFO  ****************Evaluation done.*****************
+2025-07-12 11:25:50,188   INFO  Epoch 22 has been evaluated
+2025-07-12 11:25:50,189   INFO  ==> Loading parameters from checkpoint /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/ckpt/checkpoint_epoch_23.pth to GPU
+2025-07-12 11:25:50,276   INFO  ==> Checkpoint trained from version: pcdet+0.6.0+8caccce
+2025-07-12 11:25:50,313   INFO  ==> Done (loaded 542/542)
+2025-07-12 11:25:50,317   INFO  *************** EPOCH 23 EVALUATION *****************
+2025-07-12 11:26:00,771   INFO  *************** Performance of EPOCH 23 *****************
+2025-07-12 11:26:00,772   INFO  Generate label finished(sec_per_example: 0.1290 second).
+2025-07-12 11:26:00,772   INFO  recall_roi_0.3: 0.000000
+2025-07-12 11:26:00,772   INFO  recall_rcnn_0.3: 0.577730
+2025-07-12 11:26:00,772   INFO  recall_roi_0.5: 0.000000
+2025-07-12 11:26:00,772   INFO  recall_rcnn_0.5: 0.271920
+2025-07-12 11:26:00,772   INFO  recall_roi_0.7: 0.000000
+2025-07-12 11:26:00,772   INFO  recall_rcnn_0.7: 0.057289
+2025-07-12 11:26:00,772   INFO  Average predicted number of objects(81 samples): 211.123
+2025-07-12 11:26:04,333   INFO  The predictions of NuScenes have been saved to /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/eval/eval_all_default/default/epoch_23/val/final_result/data/results_nusc.json
+2025-07-12 11:26:08,022   INFO  ----------------Nuscene detection_cvpr_2019 results-----------------
+***car error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.30, 0.19, 1.01, 0.21, 0.11 | 45.87, 64.29, 76.09, 80.39 | mean AP: 0.6666196449949982
+***truck error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.25, 0.23, 0.83, 0.05, 0.00 | 13.53, 15.28, 15.74, 15.98 | mean AP: 0.15133484952653029
+***construction_vehicle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***bus error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.86, 0.27, 0.77, 2.03, 0.56 | 0.01, 7.77, 19.56, 29.85 | mean AP: 0.14299079959403532
+***trailer error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***barrier error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, nan, nan | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***motorcycle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.24, 0.30, 1.40, 0.08, 0.04 | 3.19, 4.06, 4.14, 4.63 | mean AP: 0.04004384879139767
+***bicycle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.25, 0.39, 1.42, 0.07, 0.15 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***pedestrian error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.21, 0.25, 0.98, 0.34, 0.16 | 75.92, 78.45, 81.34, 84.87 | mean AP: 0.8014628278737072
+***traffic_cone error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.18, 0.56, nan, nan, nan | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+--------------average performance-------------
+trans_err:	 0.5294
+scale_err:	 0.5195
+orient_err:	 1.0456
+vel_err:	 0.5988
+attr_err:	 0.3772
+mAP:	 0.1802
+NDS:	 0.2876
+
+2025-07-12 11:26:08,022   INFO  Result is saved to /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/eval/eval_all_default/default/epoch_23/val
+2025-07-12 11:26:08,022   INFO  ****************Evaluation done.*****************
+2025-07-12 11:26:08,026   INFO  Epoch 23 has been evaluated
+2025-07-12 11:26:08,027   INFO  ==> Loading parameters from checkpoint /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/ckpt/checkpoint_epoch_24.pth to GPU
+2025-07-12 11:26:08,100   INFO  ==> Checkpoint trained from version: pcdet+0.6.0+8caccce
+2025-07-12 11:26:08,136   INFO  ==> Done (loaded 542/542)
+2025-07-12 11:26:08,141   INFO  *************** EPOCH 24 EVALUATION *****************
+2025-07-12 11:26:18,454   INFO  *************** Performance of EPOCH 24 *****************
+2025-07-12 11:26:18,454   INFO  Generate label finished(sec_per_example: 0.1273 second).
+2025-07-12 11:26:18,454   INFO  recall_roi_0.3: 0.000000
+2025-07-12 11:26:18,454   INFO  recall_rcnn_0.3: 0.605433
+2025-07-12 11:26:18,454   INFO  recall_roi_0.5: 0.000000
+2025-07-12 11:26:18,454   INFO  recall_rcnn_0.5: 0.288058
+2025-07-12 11:26:18,454   INFO  recall_roi_0.7: 0.000000
+2025-07-12 11:26:18,454   INFO  recall_rcnn_0.7: 0.044379
+2025-07-12 11:26:18,455   INFO  Average predicted number of objects(81 samples): 216.099
+2025-07-12 11:26:22,318   INFO  The predictions of NuScenes have been saved to /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/eval/eval_all_default/default/epoch_24/val/final_result/data/results_nusc.json
+2025-07-12 11:26:26,085   INFO  ----------------Nuscene detection_cvpr_2019 results-----------------
+***car error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.33, 0.20, 0.83, 0.28, 0.16 | 42.07, 62.11, 73.88, 78.23 | mean AP: 0.6407170201061756
+***truck error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.37, 0.23, 1.27, 0.21, 0.17 | 19.49, 31.26, 34.90, 38.56 | mean AP: 0.31054760362706935
+***construction_vehicle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***bus error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.11, 0.20, 0.36, 3.91, 0.08 | 0.00, 0.39, 26.29, 32.26 | mean AP: 0.1473633969694791
+***trailer error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, 1.00, 1.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***barrier error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+1.00, 1.00, 1.00, nan, nan | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***motorcycle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.20, 0.31, 1.29, 0.06, 0.02 | 12.08, 12.55, 12.66, 14.11 | mean AP: 0.12849185482918496
+***bicycle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.35, 0.28, 1.74, 0.01, 0.00 | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+***pedestrian error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.18, 0.31, 0.64, 0.37, 0.14 | 78.98, 81.04, 83.24, 87.25 | mean AP: 0.8262712136098911
+***traffic_cone error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.20, 0.47, nan, nan, nan | 0.00, 0.00, 0.00, 0.00 | mean AP: 0.0
+--------------average performance-------------
+trans_err:	 0.5733
+scale_err:	 0.4988
+orient_err:	 1.0152
+vel_err:	 0.8553
+attr_err:	 0.3207
+mAP:	 0.2053
+NDS:	 0.2779
+
+2025-07-12 11:26:26,085   INFO  Result is saved to /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/eval/eval_all_default/default/epoch_24/val
+2025-07-12 11:26:26,085   INFO  ****************Evaluation done.*****************
+2025-07-12 11:26:26,090   INFO  Epoch 24 has been evaluated
