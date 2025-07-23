@@ -1,0 +1,697 @@
+2025-07-12 10:41:19,784   INFO  **********************Start logging**********************
+2025-07-12 10:41:19,785   INFO  CUDA_VISIBLE_DEVICES=ALL
+2025-07-12 10:41:19,785   INFO  Training with a single process
+2025-07-12 10:41:19,785   INFO  cfg_file         ./cfgs/nuscenes_models/cbgs_voxel0075_voxelnext.yaml
+2025-07-12 10:41:19,785   INFO  batch_size       4
+2025-07-12 10:41:19,785   INFO  epochs           100
+2025-07-12 10:41:19,785   INFO  workers          4
+2025-07-12 10:41:19,785   INFO  extra_tag        default
+2025-07-12 10:41:19,785   INFO  ckpt             None
+2025-07-12 10:41:19,785   INFO  pretrained_model None
+2025-07-12 10:41:19,785   INFO  launcher         none
+2025-07-12 10:41:19,785   INFO  tcp_port         18888
+2025-07-12 10:41:19,785   INFO  sync_bn          False
+2025-07-12 10:41:19,785   INFO  fix_random_seed  False
+2025-07-12 10:41:19,785   INFO  ckpt_save_interval 1
+2025-07-12 10:41:19,785   INFO  local_rank       None
+2025-07-12 10:41:19,785   INFO  max_ckpt_save_num 30
+2025-07-12 10:41:19,785   INFO  merge_all_iters_to_one_epoch False
+2025-07-12 10:41:19,785   INFO  set_cfgs         None
+2025-07-12 10:41:19,785   INFO  max_waiting_mins 0
+2025-07-12 10:41:19,785   INFO  start_epoch      0
+2025-07-12 10:41:19,785   INFO  num_epochs_to_eval 5
+2025-07-12 10:41:19,785   INFO  save_to_file     False
+2025-07-12 10:41:19,785   INFO  use_tqdm_to_record False
+2025-07-12 10:41:19,785   INFO  logger_iter_interval 50
+2025-07-12 10:41:19,785   INFO  ckpt_save_time_interval 300
+2025-07-12 10:41:19,785   INFO  wo_gpu_stat      False
+2025-07-12 10:41:19,785   INFO  use_amp          False
+2025-07-12 10:41:19,785   INFO  cfg.ROOT_DIR: /root/autodl-tmp/OpenPCDet
+2025-07-12 10:41:19,785   INFO  cfg.LOCAL_RANK: 0
+2025-07-12 10:41:19,785   INFO  cfg.CLASS_NAMES: ['car', 'truck', 'construction_vehicle', 'bus', 'trailer', 'barrier', 'motorcycle', 'bicycle', 'pedestrian', 'traffic_cone']
+2025-07-12 10:41:19,785   INFO  ----------- DATA_CONFIG -----------
+2025-07-12 10:41:19,786   INFO  cfg.DATA_CONFIG.DATASET: NuScenesDataset
+2025-07-12 10:41:19,786   INFO  cfg.DATA_CONFIG.DATA_PATH: ../data/nuscenes
+2025-07-12 10:41:19,786   INFO  cfg.DATA_CONFIG.VERSION: v1.0-mini
+2025-07-12 10:41:19,786   INFO  cfg.DATA_CONFIG.MAX_SWEEPS: 10
+2025-07-12 10:41:19,786   INFO  cfg.DATA_CONFIG.PRED_VELOCITY: True
+2025-07-12 10:41:19,786   INFO  cfg.DATA_CONFIG.SET_NAN_VELOCITY_TO_ZEROS: True
+2025-07-12 10:41:19,786   INFO  cfg.DATA_CONFIG.FILTER_MIN_POINTS_IN_GT: 1
+2025-07-12 10:41:19,786   INFO  ----------- DATA_SPLIT -----------
+2025-07-12 10:41:19,786   INFO  cfg.DATA_CONFIG.DATA_SPLIT.train: train
+2025-07-12 10:41:19,786   INFO  cfg.DATA_CONFIG.DATA_SPLIT.test: val
+2025-07-12 10:41:19,786   INFO  ----------- INFO_PATH -----------
+2025-07-12 10:41:19,786   INFO  cfg.DATA_CONFIG.INFO_PATH.train: ['nuscenes_infos_10sweeps_train.pkl']
+2025-07-12 10:41:19,786   INFO  cfg.DATA_CONFIG.INFO_PATH.test: ['nuscenes_infos_10sweeps_val.pkl']
+2025-07-12 10:41:19,786   INFO  cfg.DATA_CONFIG.POINT_CLOUD_RANGE: [-54.0, -54.0, -5.0, 54.0, 54.0, 3.0]
+2025-07-12 10:41:19,786   INFO  cfg.DATA_CONFIG.BALANCED_RESAMPLING: True
+2025-07-12 10:41:19,786   INFO  ----------- DATA_AUGMENTOR -----------
+2025-07-12 10:41:19,786   INFO  cfg.DATA_CONFIG.DATA_AUGMENTOR.DISABLE_AUG_LIST: ['placeholder']
+2025-07-12 10:41:19,786   INFO  cfg.DATA_CONFIG.DATA_AUGMENTOR.AUG_CONFIG_LIST: [{'NAME': 'gt_sampling', 'DB_INFO_PATH': ['nuscenes_dbinfos_10sweeps_withvelo.pkl'], 'USE_SHARED_MEMORY': False, 'DB_DATA_PATH': ['nuscenes_dbinfos_10sweeps_withvelo_global.pkl.npy'], 'PREPARE': {'filter_by_min_points': ['car:5', 'truck:5', 'construction_vehicle:5', 'bus:5', 'trailer:5', 'barrier:5', 'motorcycle:5', 'bicycle:5', 'pedestrian:5', 'traffic_cone:5']}, 'SAMPLE_GROUPS': ['car:2', 'truck:2', 'construction_vehicle:2', 'bus:2', 'trailer:2', 'barrier:2', 'motorcycle:2', 'bicycle:2', 'pedestrian:2', 'traffic_cone:2'], 'NUM_POINT_FEATURES': 5, 'DATABASE_WITH_FAKELIDAR': False, 'REMOVE_EXTRA_WIDTH': [0.0, 0.0, 0.0], 'LIMIT_WHOLE_SCENE': True}, {'NAME': 'random_world_flip', 'ALONG_AXIS_LIST': ['x', 'y']}, {'NAME': 'random_world_rotation', 'WORLD_ROT_ANGLE': [-0.78539816, 0.78539816]}, {'NAME': 'random_world_scaling', 'WORLD_SCALE_RANGE': [0.9, 1.1]}, {'NAME': 'random_world_translation', 'NOISE_TRANSLATE_STD': [0.5, 0.5, 0.5]}]
+2025-07-12 10:41:19,786   INFO  ----------- POINT_FEATURE_ENCODING -----------
+2025-07-12 10:41:19,786   INFO  cfg.DATA_CONFIG.POINT_FEATURE_ENCODING.encoding_type: absolute_coordinates_encoding
+2025-07-12 10:41:19,786   INFO  cfg.DATA_CONFIG.POINT_FEATURE_ENCODING.used_feature_list: ['x', 'y', 'z', 'intensity', 'timestamp']
+2025-07-12 10:41:19,786   INFO  cfg.DATA_CONFIG.POINT_FEATURE_ENCODING.src_feature_list: ['x', 'y', 'z', 'intensity', 'timestamp']
+2025-07-12 10:41:19,786   INFO  cfg.DATA_CONFIG.DATA_PROCESSOR: [{'NAME': 'mask_points_and_boxes_outside_range', 'REMOVE_OUTSIDE_BOXES': True}, {'NAME': 'shuffle_points', 'SHUFFLE_ENABLED': {'train': True, 'test': True}}, {'NAME': 'transform_points_to_voxels', 'VOXEL_SIZE': [0.075, 0.075, 0.2], 'MAX_POINTS_PER_VOXEL': 10, 'MAX_NUMBER_OF_VOXELS': {'train': 120000, 'test': 160000}}]
+2025-07-12 10:41:19,786   INFO  cfg.DATA_CONFIG._BASE_CONFIG_: cfgs/dataset_configs/nuscenes_dataset.yaml
+2025-07-12 10:41:19,786   INFO  ----------- MODEL -----------
+2025-07-12 10:41:19,786   INFO  cfg.MODEL.NAME: VoxelNeXt
+2025-07-12 10:41:19,786   INFO  ----------- VFE -----------
+2025-07-12 10:41:19,786   INFO  cfg.MODEL.VFE.NAME: MeanVFE
+2025-07-12 10:41:19,786   INFO  ----------- BACKBONE_3D -----------
+2025-07-12 10:41:19,786   INFO  cfg.MODEL.BACKBONE_3D.NAME: VoxelResBackBone8xVoxelNeXt
+2025-07-12 10:41:19,787   INFO  ----------- DENSE_HEAD -----------
+2025-07-12 10:41:19,787   INFO  cfg.MODEL.DENSE_HEAD.NAME: VoxelNeXtHead
+2025-07-12 10:41:19,787   INFO  cfg.MODEL.DENSE_HEAD.CLASS_AGNOSTIC: False
+2025-07-12 10:41:19,787   INFO  cfg.MODEL.DENSE_HEAD.INPUT_FEATURES: 128
+2025-07-12 10:41:19,787   INFO  cfg.MODEL.DENSE_HEAD.CLASS_NAMES_EACH_HEAD: [['car'], ['truck', 'construction_vehicle'], ['bus', 'trailer'], ['barrier'], ['motorcycle', 'bicycle'], ['pedestrian', 'traffic_cone']]
+2025-07-12 10:41:19,787   INFO  cfg.MODEL.DENSE_HEAD.SHARED_CONV_CHANNEL: 128
+2025-07-12 10:41:19,787   INFO  cfg.MODEL.DENSE_HEAD.KERNEL_SIZE_HEAD: 1
+2025-07-12 10:41:19,787   INFO  cfg.MODEL.DENSE_HEAD.USE_BIAS_BEFORE_NORM: True
+2025-07-12 10:41:19,787   INFO  cfg.MODEL.DENSE_HEAD.NUM_HM_CONV: 2
+2025-07-12 10:41:19,787   INFO  ----------- SEPARATE_HEAD_CFG -----------
+2025-07-12 10:41:19,787   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_ORDER: ['center', 'center_z', 'dim', 'rot', 'vel']
+2025-07-12 10:41:19,787   INFO  ----------- HEAD_DICT -----------
+2025-07-12 10:41:19,787   INFO  ----------- center -----------
+2025-07-12 10:41:19,787   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.center.out_channels: 2
+2025-07-12 10:41:19,787   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.center.num_conv: 2
+2025-07-12 10:41:19,787   INFO  ----------- center_z -----------
+2025-07-12 10:41:19,787   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.center_z.out_channels: 1
+2025-07-12 10:41:19,787   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.center_z.num_conv: 2
+2025-07-12 10:41:19,787   INFO  ----------- dim -----------
+2025-07-12 10:41:19,787   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.dim.out_channels: 3
+2025-07-12 10:41:19,787   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.dim.num_conv: 2
+2025-07-12 10:41:19,787   INFO  ----------- rot -----------
+2025-07-12 10:41:19,787   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.rot.out_channels: 2
+2025-07-12 10:41:19,787   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.rot.num_conv: 2
+2025-07-12 10:41:19,787   INFO  ----------- vel -----------
+2025-07-12 10:41:19,787   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.vel.out_channels: 2
+2025-07-12 10:41:19,787   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.vel.num_conv: 2
+2025-07-12 10:41:19,787   INFO  ----------- TARGET_ASSIGNER_CONFIG -----------
+2025-07-12 10:41:19,787   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.FEATURE_MAP_STRIDE: 8
+2025-07-12 10:41:19,787   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.NUM_MAX_OBJS: 500
+2025-07-12 10:41:19,787   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.GAUSSIAN_OVERLAP: 0.1
+2025-07-12 10:41:19,787   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.MIN_RADIUS: 2
+2025-07-12 10:41:19,787   INFO  ----------- LOSS_CONFIG -----------
+2025-07-12 10:41:19,787   INFO  ----------- LOSS_WEIGHTS -----------
+2025-07-12 10:41:19,788   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.cls_weight: 1.0
+2025-07-12 10:41:19,788   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.loc_weight: 0.25
+2025-07-12 10:41:19,788   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.code_weights: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.2, 0.2, 1.0, 1.0]
+2025-07-12 10:41:19,788   INFO  ----------- POST_PROCESSING -----------
+2025-07-12 10:41:19,788   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.SCORE_THRESH: 0.1
+2025-07-12 10:41:19,788   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.POST_CENTER_LIMIT_RANGE: [-61.2, -61.2, -10.0, 61.2, 61.2, 10.0]
+2025-07-12 10:41:19,788   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.MAX_OBJ_PER_SAMPLE: 500
+2025-07-12 10:41:19,788   INFO  ----------- NMS_CONFIG -----------
+2025-07-12 10:41:19,788   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.NMS_CONFIG.NMS_TYPE: nms_gpu
+2025-07-12 10:41:19,788   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.NMS_CONFIG.NMS_THRESH: 0.2
+2025-07-12 10:41:19,788   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.NMS_CONFIG.NMS_PRE_MAXSIZE: 1000
+2025-07-12 10:41:19,788   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.NMS_CONFIG.NMS_POST_MAXSIZE: 83
+2025-07-12 10:41:19,788   INFO  ----------- POST_PROCESSING -----------
+2025-07-12 10:41:19,788   INFO  cfg.MODEL.POST_PROCESSING.RECALL_THRESH_LIST: [0.3, 0.5, 0.7]
+2025-07-12 10:41:19,788   INFO  cfg.MODEL.POST_PROCESSING.EVAL_METRIC: kitti
+2025-07-12 10:41:19,788   INFO  ----------- OPTIMIZATION -----------
+2025-07-12 10:41:19,788   INFO  cfg.OPTIMIZATION.BATCH_SIZE_PER_GPU: 4
+2025-07-12 10:41:19,788   INFO  cfg.OPTIMIZATION.NUM_EPOCHS: 20
+2025-07-12 10:41:19,788   INFO  cfg.OPTIMIZATION.OPTIMIZER: adam_onecycle
+2025-07-12 10:41:19,788   INFO  cfg.OPTIMIZATION.LR: 0.003
+2025-07-12 10:41:19,788   INFO  cfg.OPTIMIZATION.WEIGHT_DECAY: 0.01
+2025-07-12 10:41:19,788   INFO  cfg.OPTIMIZATION.MOMENTUM: 0.9
+2025-07-12 10:41:19,788   INFO  cfg.OPTIMIZATION.MOMS: [0.95, 0.85]
+2025-07-12 10:41:19,788   INFO  cfg.OPTIMIZATION.PCT_START: 0.4
+2025-07-12 10:41:19,788   INFO  cfg.OPTIMIZATION.DIV_FACTOR: 10
+2025-07-12 10:41:19,788   INFO  cfg.OPTIMIZATION.DECAY_STEP_LIST: [35, 45]
+2025-07-12 10:41:19,788   INFO  cfg.OPTIMIZATION.LR_DECAY: 0.1
+2025-07-12 10:41:19,788   INFO  cfg.OPTIMIZATION.LR_CLIP: 1e-07
+2025-07-12 10:41:19,788   INFO  cfg.OPTIMIZATION.LR_WARMUP: False
+2025-07-12 10:41:19,788   INFO  cfg.OPTIMIZATION.WARMUP_EPOCH: 1
+2025-07-12 10:41:19,788   INFO  cfg.OPTIMIZATION.GRAD_NORM_CLIP: 10
+2025-07-12 10:41:19,788   INFO  cfg.TAG: cbgs_voxel0075_voxelnext
+2025-07-12 10:41:19,788   INFO  cfg.EXP_GROUP_PATH: cfgs/nuscenes_models
+2025-07-12 10:41:19,795   INFO  ----------- Create dataloader & network & optimizer -----------
+2025-07-12 10:41:19,844   INFO  Database filter by min points car: 4082 => 3303
+2025-07-12 10:41:19,845   INFO  Database filter by min points truck: 451 => 412
+2025-07-12 10:41:19,845   INFO  Database filter by min points construction_vehicle: 174 => 161
+2025-07-12 10:41:19,845   INFO  Database filter by min points bus: 337 => 309
+2025-07-12 10:41:19,845   INFO  Database filter by min points trailer: 59 => 57
+2025-07-12 10:41:19,845   INFO  Database filter by min points barrier: 1851 => 1741
+2025-07-12 10:41:19,845   INFO  Database filter by min points motorcycle: 179 => 149
+2025-07-12 10:41:19,845   INFO  Database filter by min points bicycle: 147 => 136
+2025-07-12 10:41:19,846   INFO  Database filter by min points pedestrian: 3068 => 2799
+2025-07-12 10:41:19,846   INFO  Database filter by min points traffic_cone: 773 => 635
+2025-07-12 10:41:19,847   INFO  Loading NuScenes dataset
+2025-07-12 10:41:19,870   INFO  Total samples for NuScenes dataset: 323
+2025-07-12 10:41:19,874   INFO  Total samples after balanced resampling: 1630
+2025-07-12 10:41:21,580   INFO  ==> Loading parameters from checkpoint /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/ckpt/checkpoint_epoch_17.pth to GPU
+2025-07-12 10:41:21,697   INFO  ==> Loading optimizer parameters from checkpoint /root/autodl-tmp/OpenPCDet/output/cfgs/nuscenes_models/cbgs_voxel0075_voxelnext/default/ckpt/checkpoint_epoch_17.pth to GPU
+2025-07-12 10:41:21,727   INFO  ==> Done
+2025-07-12 10:41:21,730   INFO  ----------- Model VoxelNeXt created, param count: 7981398 -----------
+2025-07-12 10:41:21,730   INFO  VoxelNeXt(
+  (vfe): MeanVFE()
+  (backbone_3d): VoxelResBackBone8xVoxelNeXt(
+    (conv_input): SparseSequential(
+      (0): SubMConv3d(5, 16, kernel_size=[3, 3, 3], stride=[1, 1, 1], padding=[1, 1, 1], dilation=[1, 1, 1], output_padding=[0, 0, 0], bias=False, algo=ConvAlgo.MaskImplicitGemm)
+      (1): BatchNorm1d(16, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+      (2): ReLU()
+    )
+    (conv1): SparseSequential(
+      (0): SparseBasicBlock(
+        (conv1): SubMConv3d(16, 16, kernel_size=[3, 3, 3], stride=[1, 1, 1], padding=[1, 1, 1], dilation=[1, 1, 1], output_padding=[0, 0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        (bn1): BatchNorm1d(16, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (relu): ReLU()
+        (conv2): SubMConv3d(16, 16, kernel_size=[3, 3, 3], stride=[1, 1, 1], padding=[1, 1, 1], dilation=[1, 1, 1], output_padding=[0, 0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        (bn2): BatchNorm1d(16, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+      )
+      (1): SparseBasicBlock(
+        (conv1): SubMConv3d(16, 16, kernel_size=[3, 3, 3], stride=[1, 1, 1], padding=[1, 1, 1], dilation=[1, 1, 1], output_padding=[0, 0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        (bn1): BatchNorm1d(16, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (relu): ReLU()
+        (conv2): SubMConv3d(16, 16, kernel_size=[3, 3, 3], stride=[1, 1, 1], padding=[1, 1, 1], dilation=[1, 1, 1], output_padding=[0, 0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        (bn2): BatchNorm1d(16, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+      )
+    )
+    (conv2): SparseSequential(
+      (0): SparseSequential(
+        (0): SparseConv3d(16, 32, kernel_size=[3, 3, 3], stride=[2, 2, 2], padding=[1, 1, 1], dilation=[1, 1, 1], output_padding=[0, 0, 0], bias=False, algo=ConvAlgo.MaskImplicitGemm)
+        (1): BatchNorm1d(32, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (2): ReLU()
+      )
+      (1): SparseBasicBlock(
+        (conv1): SubMConv3d(32, 32, kernel_size=[3, 3, 3], stride=[1, 1, 1], padding=[1, 1, 1], dilation=[1, 1, 1], output_padding=[0, 0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        (bn1): BatchNorm1d(32, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (relu): ReLU()
+        (conv2): SubMConv3d(32, 32, kernel_size=[3, 3, 3], stride=[1, 1, 1], padding=[1, 1, 1], dilation=[1, 1, 1], output_padding=[0, 0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        (bn2): BatchNorm1d(32, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+      )
+      (2): SparseBasicBlock(
+        (conv1): SubMConv3d(32, 32, kernel_size=[3, 3, 3], stride=[1, 1, 1], padding=[1, 1, 1], dilation=[1, 1, 1], output_padding=[0, 0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        (bn1): BatchNorm1d(32, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (relu): ReLU()
+        (conv2): SubMConv3d(32, 32, kernel_size=[3, 3, 3], stride=[1, 1, 1], padding=[1, 1, 1], dilation=[1, 1, 1], output_padding=[0, 0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        (bn2): BatchNorm1d(32, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+      )
+    )
+    (conv3): SparseSequential(
+      (0): SparseSequential(
+        (0): SparseConv3d(32, 64, kernel_size=[3, 3, 3], stride=[2, 2, 2], padding=[1, 1, 1], dilation=[1, 1, 1], output_padding=[0, 0, 0], bias=False, algo=ConvAlgo.MaskImplicitGemm)
+        (1): BatchNorm1d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (2): ReLU()
+      )
+      (1): SparseBasicBlock(
+        (conv1): SubMConv3d(64, 64, kernel_size=[3, 3, 3], stride=[1, 1, 1], padding=[1, 1, 1], dilation=[1, 1, 1], output_padding=[0, 0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        (bn1): BatchNorm1d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (relu): ReLU()
+        (conv2): SubMConv3d(64, 64, kernel_size=[3, 3, 3], stride=[1, 1, 1], padding=[1, 1, 1], dilation=[1, 1, 1], output_padding=[0, 0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        (bn2): BatchNorm1d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+      )
+      (2): SparseBasicBlock(
+        (conv1): SubMConv3d(64, 64, kernel_size=[3, 3, 3], stride=[1, 1, 1], padding=[1, 1, 1], dilation=[1, 1, 1], output_padding=[0, 0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        (bn1): BatchNorm1d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (relu): ReLU()
+        (conv2): SubMConv3d(64, 64, kernel_size=[3, 3, 3], stride=[1, 1, 1], padding=[1, 1, 1], dilation=[1, 1, 1], output_padding=[0, 0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        (bn2): BatchNorm1d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+      )
+    )
+    (conv4): SparseSequential(
+      (0): SparseSequential(
+        (0): SparseConv3d(64, 128, kernel_size=[3, 3, 3], stride=[2, 2, 2], padding=[1, 1, 1], dilation=[1, 1, 1], output_padding=[0, 0, 0], bias=False, algo=ConvAlgo.MaskImplicitGemm)
+        (1): BatchNorm1d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (2): ReLU()
+      )
+      (1): SparseBasicBlock(
+        (conv1): SubMConv3d(128, 128, kernel_size=[3, 3, 3], stride=[1, 1, 1], padding=[1, 1, 1], dilation=[1, 1, 1], output_padding=[0, 0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        (bn1): BatchNorm1d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (relu): ReLU()
+        (conv2): SubMConv3d(128, 128, kernel_size=[3, 3, 3], stride=[1, 1, 1], padding=[1, 1, 1], dilation=[1, 1, 1], output_padding=[0, 0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        (bn2): BatchNorm1d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+      )
+      (2): SparseBasicBlock(
+        (conv1): SubMConv3d(128, 128, kernel_size=[3, 3, 3], stride=[1, 1, 1], padding=[1, 1, 1], dilation=[1, 1, 1], output_padding=[0, 0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        (bn1): BatchNorm1d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (relu): ReLU()
+        (conv2): SubMConv3d(128, 128, kernel_size=[3, 3, 3], stride=[1, 1, 1], padding=[1, 1, 1], dilation=[1, 1, 1], output_padding=[0, 0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        (bn2): BatchNorm1d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+      )
+    )
+    (conv5): SparseSequential(
+      (0): SparseSequential(
+        (0): SparseConv3d(128, 128, kernel_size=[3, 3, 3], stride=[2, 2, 2], padding=[1, 1, 1], dilation=[1, 1, 1], output_padding=[0, 0, 0], bias=False, algo=ConvAlgo.MaskImplicitGemm)
+        (1): BatchNorm1d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (2): ReLU()
+      )
+      (1): SparseBasicBlock(
+        (conv1): SubMConv3d(128, 128, kernel_size=[3, 3, 3], stride=[1, 1, 1], padding=[1, 1, 1], dilation=[1, 1, 1], output_padding=[0, 0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        (bn1): BatchNorm1d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (relu): ReLU()
+        (conv2): SubMConv3d(128, 128, kernel_size=[3, 3, 3], stride=[1, 1, 1], padding=[1, 1, 1], dilation=[1, 1, 1], output_padding=[0, 0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        (bn2): BatchNorm1d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+      )
+      (2): SparseBasicBlock(
+        (conv1): SubMConv3d(128, 128, kernel_size=[3, 3, 3], stride=[1, 1, 1], padding=[1, 1, 1], dilation=[1, 1, 1], output_padding=[0, 0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        (bn1): BatchNorm1d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (relu): ReLU()
+        (conv2): SubMConv3d(128, 128, kernel_size=[3, 3, 3], stride=[1, 1, 1], padding=[1, 1, 1], dilation=[1, 1, 1], output_padding=[0, 0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        (bn2): BatchNorm1d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+      )
+    )
+    (conv6): SparseSequential(
+      (0): SparseSequential(
+        (0): SparseConv3d(128, 128, kernel_size=[3, 3, 3], stride=[2, 2, 2], padding=[1, 1, 1], dilation=[1, 1, 1], output_padding=[0, 0, 0], bias=False, algo=ConvAlgo.MaskImplicitGemm)
+        (1): BatchNorm1d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (2): ReLU()
+      )
+      (1): SparseBasicBlock(
+        (conv1): SubMConv3d(128, 128, kernel_size=[3, 3, 3], stride=[1, 1, 1], padding=[1, 1, 1], dilation=[1, 1, 1], output_padding=[0, 0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        (bn1): BatchNorm1d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (relu): ReLU()
+        (conv2): SubMConv3d(128, 128, kernel_size=[3, 3, 3], stride=[1, 1, 1], padding=[1, 1, 1], dilation=[1, 1, 1], output_padding=[0, 0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        (bn2): BatchNorm1d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+      )
+      (2): SparseBasicBlock(
+        (conv1): SubMConv3d(128, 128, kernel_size=[3, 3, 3], stride=[1, 1, 1], padding=[1, 1, 1], dilation=[1, 1, 1], output_padding=[0, 0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        (bn1): BatchNorm1d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (relu): ReLU()
+        (conv2): SubMConv3d(128, 128, kernel_size=[3, 3, 3], stride=[1, 1, 1], padding=[1, 1, 1], dilation=[1, 1, 1], output_padding=[0, 0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        (bn2): BatchNorm1d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+      )
+    )
+    (conv_out): SparseSequential(
+      (0): SparseConv2d(128, 128, kernel_size=[3, 3], stride=[1, 1], padding=[1, 1], dilation=[1, 1], output_padding=[0, 0], bias=False, algo=ConvAlgo.MaskImplicitGemm)
+      (1): BatchNorm1d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+      (2): ReLU()
+    )
+    (shared_conv): SparseSequential(
+      (0): SubMConv2d(128, 128, kernel_size=[3, 3], stride=[1, 1], padding=[1, 1], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+      (1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU(inplace=True)
+    )
+  )
+  (map_to_bev_module): None
+  (pfe): None
+  (backbone_2d): None
+  (dense_head): VoxelNeXtHead(
+    (heads_list): ModuleList(
+      (0): SeparateHead(
+        (center): Sequential(
+          (0): SparseSequential(
+            (0): SubMConv2d(128, 128, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+            (1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU()
+          )
+          (1): SubMConv2d(128, 2, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        )
+        (center_z): Sequential(
+          (0): SparseSequential(
+            (0): SubMConv2d(128, 128, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+            (1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU()
+          )
+          (1): SubMConv2d(128, 1, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        )
+        (dim): Sequential(
+          (0): SparseSequential(
+            (0): SubMConv2d(128, 128, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+            (1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU()
+          )
+          (1): SubMConv2d(128, 3, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        )
+        (rot): Sequential(
+          (0): SparseSequential(
+            (0): SubMConv2d(128, 128, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+            (1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU()
+          )
+          (1): SubMConv2d(128, 2, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        )
+        (vel): Sequential(
+          (0): SparseSequential(
+            (0): SubMConv2d(128, 128, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+            (1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU()
+          )
+          (1): SubMConv2d(128, 2, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        )
+        (hm): Sequential(
+          (0): SparseSequential(
+            (0): SubMConv2d(128, 128, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+            (1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU()
+          )
+          (1): SubMConv2d(128, 1, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        )
+      )
+      (1): SeparateHead(
+        (center): Sequential(
+          (0): SparseSequential(
+            (0): SubMConv2d(128, 128, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+            (1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU()
+          )
+          (1): SubMConv2d(128, 2, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        )
+        (center_z): Sequential(
+          (0): SparseSequential(
+            (0): SubMConv2d(128, 128, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+            (1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU()
+          )
+          (1): SubMConv2d(128, 1, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        )
+        (dim): Sequential(
+          (0): SparseSequential(
+            (0): SubMConv2d(128, 128, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+            (1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU()
+          )
+          (1): SubMConv2d(128, 3, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        )
+        (rot): Sequential(
+          (0): SparseSequential(
+            (0): SubMConv2d(128, 128, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+            (1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU()
+          )
+          (1): SubMConv2d(128, 2, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        )
+        (vel): Sequential(
+          (0): SparseSequential(
+            (0): SubMConv2d(128, 128, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+            (1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU()
+          )
+          (1): SubMConv2d(128, 2, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        )
+        (hm): Sequential(
+          (0): SparseSequential(
+            (0): SubMConv2d(128, 128, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+            (1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU()
+          )
+          (1): SubMConv2d(128, 2, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        )
+      )
+      (2): SeparateHead(
+        (center): Sequential(
+          (0): SparseSequential(
+            (0): SubMConv2d(128, 128, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+            (1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU()
+          )
+          (1): SubMConv2d(128, 2, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        )
+        (center_z): Sequential(
+          (0): SparseSequential(
+            (0): SubMConv2d(128, 128, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+            (1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU()
+          )
+          (1): SubMConv2d(128, 1, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        )
+        (dim): Sequential(
+          (0): SparseSequential(
+            (0): SubMConv2d(128, 128, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+            (1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU()
+          )
+          (1): SubMConv2d(128, 3, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        )
+        (rot): Sequential(
+          (0): SparseSequential(
+            (0): SubMConv2d(128, 128, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+            (1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU()
+          )
+          (1): SubMConv2d(128, 2, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        )
+        (vel): Sequential(
+          (0): SparseSequential(
+            (0): SubMConv2d(128, 128, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+            (1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU()
+          )
+          (1): SubMConv2d(128, 2, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        )
+        (hm): Sequential(
+          (0): SparseSequential(
+            (0): SubMConv2d(128, 128, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+            (1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU()
+          )
+          (1): SubMConv2d(128, 2, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        )
+      )
+      (3): SeparateHead(
+        (center): Sequential(
+          (0): SparseSequential(
+            (0): SubMConv2d(128, 128, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+            (1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU()
+          )
+          (1): SubMConv2d(128, 2, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        )
+        (center_z): Sequential(
+          (0): SparseSequential(
+            (0): SubMConv2d(128, 128, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+            (1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU()
+          )
+          (1): SubMConv2d(128, 1, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        )
+        (dim): Sequential(
+          (0): SparseSequential(
+            (0): SubMConv2d(128, 128, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+            (1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU()
+          )
+          (1): SubMConv2d(128, 3, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        )
+        (rot): Sequential(
+          (0): SparseSequential(
+            (0): SubMConv2d(128, 128, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+            (1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU()
+          )
+          (1): SubMConv2d(128, 2, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        )
+        (vel): Sequential(
+          (0): SparseSequential(
+            (0): SubMConv2d(128, 128, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+            (1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU()
+          )
+          (1): SubMConv2d(128, 2, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        )
+        (hm): Sequential(
+          (0): SparseSequential(
+            (0): SubMConv2d(128, 128, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+            (1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU()
+          )
+          (1): SubMConv2d(128, 1, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        )
+      )
+      (4): SeparateHead(
+        (center): Sequential(
+          (0): SparseSequential(
+            (0): SubMConv2d(128, 128, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+            (1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU()
+          )
+          (1): SubMConv2d(128, 2, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        )
+        (center_z): Sequential(
+          (0): SparseSequential(
+            (0): SubMConv2d(128, 128, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+            (1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU()
+          )
+          (1): SubMConv2d(128, 1, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        )
+        (dim): Sequential(
+          (0): SparseSequential(
+            (0): SubMConv2d(128, 128, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+            (1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU()
+          )
+          (1): SubMConv2d(128, 3, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        )
+        (rot): Sequential(
+          (0): SparseSequential(
+            (0): SubMConv2d(128, 128, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+            (1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU()
+          )
+          (1): SubMConv2d(128, 2, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        )
+        (vel): Sequential(
+          (0): SparseSequential(
+            (0): SubMConv2d(128, 128, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+            (1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU()
+          )
+          (1): SubMConv2d(128, 2, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        )
+        (hm): Sequential(
+          (0): SparseSequential(
+            (0): SubMConv2d(128, 128, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+            (1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU()
+          )
+          (1): SubMConv2d(128, 2, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        )
+      )
+      (5): SeparateHead(
+        (center): Sequential(
+          (0): SparseSequential(
+            (0): SubMConv2d(128, 128, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+            (1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU()
+          )
+          (1): SubMConv2d(128, 2, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        )
+        (center_z): Sequential(
+          (0): SparseSequential(
+            (0): SubMConv2d(128, 128, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+            (1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU()
+          )
+          (1): SubMConv2d(128, 1, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        )
+        (dim): Sequential(
+          (0): SparseSequential(
+            (0): SubMConv2d(128, 128, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+            (1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU()
+          )
+          (1): SubMConv2d(128, 3, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        )
+        (rot): Sequential(
+          (0): SparseSequential(
+            (0): SubMConv2d(128, 128, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+            (1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU()
+          )
+          (1): SubMConv2d(128, 2, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        )
+        (vel): Sequential(
+          (0): SparseSequential(
+            (0): SubMConv2d(128, 128, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+            (1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU()
+          )
+          (1): SubMConv2d(128, 2, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        )
+        (hm): Sequential(
+          (0): SparseSequential(
+            (0): SubMConv2d(128, 128, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+            (1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU()
+          )
+          (1): SubMConv2d(128, 2, kernel_size=[1, 1], stride=[1, 1], padding=[0, 0], dilation=[1, 1], output_padding=[0, 0], algo=ConvAlgo.MaskImplicitGemm)
+        )
+      )
+    )
+    (hm_loss_func): FocalLossSparse()
+    (reg_loss_func): RegLossSparse()
+  )
+  (point_head): None
+  (roi_head): None
+)
+2025-07-12 10:41:21,736   INFO  **********************Start training cfgs/nuscenes_models/cbgs_voxel0075_voxelnext(default)**********************
+2025-07-12 10:41:38,123   INFO  Train:   18/100 ( 18%) [   0/408 (  0%)]  Loss: 6.295 (6.30)  LR: 1.335e-03  Time cost: 00:15/1:43:16 [00:16/142:51:23]  Acc_iter 6937        Data time: 5.06(5.06)  Forward time: 10.12(10.12)  Batch time: 15.19(15.19)
+2025-07-12 10:41:44,848   INFO  Train:   18/100 ( 18%) [  13/408 (  3%)]  Loss: 7.410 (7.26)  LR: 1.338e-03  Time cost: 00:21/10:18 [00:23/14:43:00]  Acc_iter 6950        Data time: 0.00(0.37)  Forward time: 0.56(1.20)  Batch time: 0.57(1.57)
+2025-07-12 10:42:11,467   INFO  Train:   18/100 ( 18%) [  63/408 ( 15%)]  Loss: 7.168 (7.30)  LR: 1.351e-03  Time cost: 00:48/04:21 [00:49/7:07:10]  Acc_iter 7000        Data time: 0.00(0.08)  Forward time: 0.79(0.68)  Batch time: 0.80(0.76)
+2025-07-12 10:42:38,107   INFO  Train:   18/100 ( 18%) [ 113/408 ( 28%)]  Loss: 7.473 (7.09)  LR: 1.363e-03  Time cost: 01:15/03:14 [01:16/6:10:55]  Acc_iter 7050        Data time: 0.00(0.05)  Forward time: 0.55(0.61)  Batch time: 0.55(0.66)
+2025-07-12 10:42:38,358   INFO  
+2025-07-12 10:43:04,025   INFO  Train:   18/100 ( 18%) [ 163/408 ( 40%)]  Loss: 6.700 (7.02)  LR: 1.376e-03  Time cost: 01:41/02:31 [01:42/5:46:12]  Acc_iter 7100        Data time: 0.00(0.04)  Forward time: 0.45(0.58)  Batch time: 0.45(0.62)
+2025-07-12 10:43:29,846   INFO  Train:   18/100 ( 18%) [ 213/408 ( 52%)]  Loss: 6.646 (6.99)  LR: 1.389e-03  Time cost: 02:06/01:55 [02:08/5:32:36]  Acc_iter 7150        Data time: 0.00(0.03)  Forward time: 0.39(0.56)  Batch time: 0.40(0.59)
+2025-07-12 10:43:55,881   INFO  Train:   18/100 ( 18%) [ 263/408 ( 64%)]  Loss: 7.657 (7.03)  LR: 1.402e-03  Time cost: 02:32/01:24 [02:34/5:24:26]  Acc_iter 7200        Data time: 0.00(0.02)  Forward time: 0.30(0.55)  Batch time: 0.30(0.58)
+2025-07-12 10:43:56,097   INFO  
+2025-07-12 10:44:22,691   INFO  Train:   18/100 ( 18%) [ 313/408 ( 77%)]  Loss: 6.315 (7.00)  LR: 1.414e-03  Time cost: 02:59/00:54 [03:00/5:20:06]  Acc_iter 7250        Data time: 0.00(0.02)  Forward time: 0.43(0.55)  Batch time: 0.43(0.57)
+2025-07-12 10:44:49,113   INFO  Train:   18/100 ( 18%) [ 363/408 ( 89%)]  Loss: 5.317 (6.97)  LR: 1.427e-03  Time cost: 03:26/00:25 [03:27/5:16:15]  Acc_iter 7300        Data time: 0.00(0.02)  Forward time: 0.53(0.55)  Batch time: 0.54(0.57)
+2025-07-12 10:45:09,465   INFO  Train:   18/100 ( 18%) [ 407/408 (100%)]  Loss: 7.486 (6.95)  LR: 1.439e-03  Time cost: 03:46/00:00 [03:47/5:09:35]  Acc_iter 7344        Data time: 0.00(0.02)  Forward time: 0.14(0.54)  Batch time: 0.14(0.56)
+2025-07-12 10:45:14,139   INFO  Train:   19/100 ( 19%) [   0/408 (  0%)]  Loss: 5.436 (5.44)  LR: 1.439e-03  Time cost: 00:04/27:21 [03:52/37:23:00]  Acc_iter 7345        Data time: 3.08(3.08)  Forward time: 0.94(0.94)  Batch time: 4.02(4.02)
+2025-07-12 10:45:16,629   INFO  Train:   19/100 ( 19%) [   5/408 (  1%)]  Loss: 6.620 (6.91)  LR: 1.440e-03  Time cost: 00:06/07:17 [03:54/10:05:10]  Acc_iter 7350        Data time: 0.00(0.52)  Forward time: 0.56(0.57)  Batch time: 0.56(1.09)
+2025-07-12 10:45:16,865   INFO  
+2025-07-12 10:45:43,022   INFO  Train:   19/100 ( 19%) [  55/408 ( 13%)]  Loss: 8.043 (6.78)  LR: 1.453e-03  Time cost: 00:32/03:27 [04:21/5:27:06]  Acc_iter 7400        Data time: 0.00(0.06)  Forward time: 0.70(0.52)  Batch time: 0.70(0.59)
+2025-07-12 10:46:09,694   INFO  Train:   19/100 ( 19%) [ 105/408 ( 26%)]  Loss: 6.361 (6.61)  LR: 1.466e-03  Time cost: 00:59/02:50 [04:47/5:12:25]  Acc_iter 7450        Data time: 0.00(0.04)  Forward time: 0.34(0.53)  Batch time: 0.35(0.56)
+2025-07-12 10:46:34,996   INFO  Train:   19/100 ( 19%) [ 155/408 ( 38%)]  Loss: 7.075 (6.69)  LR: 1.479e-03  Time cost: 01:24/02:17 [05:13/5:01:59]  Acc_iter 7500        Data time: 0.00(0.03)  Forward time: 0.40(0.52)  Batch time: 0.41(0.54)
+2025-07-12 10:46:35,186   INFO  
+2025-07-12 10:46:59,556   INFO  Train:   19/100 ( 19%) [ 205/408 ( 50%)]  Loss: 5.736 (6.72)  LR: 1.492e-03  Time cost: 01:49/01:47 [05:37/4:54:25]  Acc_iter 7550        Data time: 0.00(0.02)  Forward time: 0.30(0.51)  Batch time: 0.30(0.53)
+2025-07-12 10:47:25,808   INFO  Train:   19/100 ( 19%) [ 255/408 ( 62%)]  Loss: 5.451 (6.81)  LR: 1.504e-03  Time cost: 02:15/01:21 [06:04/4:53:18]  Acc_iter 7600        Data time: 0.00(0.02)  Forward time: 0.61(0.51)  Batch time: 0.61(0.53)
+2025-07-12 10:47:51,769   INFO  Train:   19/100 ( 19%) [ 305/408 ( 75%)]  Loss: 5.197 (6.81)  LR: 1.517e-03  Time cost: 02:41/00:54 [06:30/4:51:52]  Acc_iter 7650        Data time: 0.00(0.02)  Forward time: 0.44(0.51)  Batch time: 0.44(0.53)
+2025-07-12 10:47:51,979   INFO  
+2025-07-12 10:48:17,427   INFO  Train:   19/100 ( 19%) [ 355/408 ( 87%)]  Loss: 6.781 (6.81)  LR: 1.530e-03  Time cost: 03:07/00:27 [06:55/4:50:16]  Acc_iter 7700        Data time: 0.00(0.01)  Forward time: 0.74(0.51)  Batch time: 0.74(0.53)
+2025-07-12 10:48:40,696   INFO  Train:   19/100 ( 19%) [ 405/408 ( 99%)]  Loss: 8.637 (6.79)  LR: 1.543e-03  Time cost: 03:30/00:01 [07:18/4:45:42]  Acc_iter 7750        Data time: 0.00(0.01)  Forward time: 0.26(0.51)  Batch time: 0.26(0.52)
+2025-07-12 10:48:41,036   INFO  Train:   19/100 ( 19%) [ 407/408 (100%)]  Loss: 5.155 (6.78)  LR: 1.544e-03  Time cost: 03:30/00:00 [07:19/4:44:45]  Acc_iter 7752        Data time: 0.00(0.01)  Forward time: 0.16(0.50)  Batch time: 0.16(0.52)
+2025-07-12 10:48:45,202   INFO  Train:   20/100 ( 20%) [   0/408 (  0%)]  Loss: 6.190 (6.19)  LR: 1.544e-03  Time cost: 00:03/23:47 [07:23/32:07:18]  Acc_iter 7753        Data time: 2.05(2.05)  Forward time: 1.45(1.45)  Batch time: 3.50(3.50)
+2025-07-12 10:49:09,374   INFO  Train:   20/100 ( 20%) [  47/408 ( 12%)]  Loss: 6.265 (6.55)  LR: 1.556e-03  Time cost: 00:27/03:28 [07:47/5:17:04]  Acc_iter 7800        Data time: 0.00(0.05)  Forward time: 0.38(0.53)  Batch time: 0.38(0.58)
+2025-07-12 10:49:09,589   INFO  
+2025-07-12 10:49:34,964   INFO  Train:   20/100 ( 20%) [  97/408 ( 24%)]  Loss: 7.370 (6.45)  LR: 1.569e-03  Time cost: 00:53/02:49 [08:13/4:58:28]  Acc_iter 7850        Data time: 0.00(0.03)  Forward time: 0.49(0.52)  Batch time: 0.49(0.54)
+2025-07-12 10:50:00,412   INFO  Train:   20/100 ( 20%) [ 147/408 ( 36%)]  Loss: 8.139 (6.51)  LR: 1.582e-03  Time cost: 01:18/02:18 [08:38/4:51:37]  Acc_iter 7900        Data time: 0.00(0.02)  Forward time: 0.34(0.51)  Batch time: 0.34(0.53)
+2025-07-12 10:50:26,103   INFO  Train:   20/100 ( 20%) [ 197/408 ( 48%)]  Loss: 5.081 (6.58)  LR: 1.595e-03  Time cost: 01:44/01:51 [09:04/4:48:41]  Acc_iter 7950        Data time: 0.01(0.02)  Forward time: 0.56(0.51)  Batch time: 0.57(0.53)
+2025-07-12 10:50:26,307   INFO  
+2025-07-12 10:50:51,044   INFO  Train:   20/100 ( 20%) [ 247/408 ( 61%)]  Loss: 5.879 (6.55)  LR: 1.608e-03  Time cost: 02:09/01:23 [09:29/4:45:06]  Acc_iter 8000        Data time: 0.00(0.01)  Forward time: 0.32(0.51)  Batch time: 0.32(0.52)
+2025-07-12 10:51:16,397   INFO  Train:   20/100 ( 20%) [ 297/408 ( 73%)]  Loss: 6.305 (6.55)  LR: 1.621e-03  Time cost: 02:34/00:57 [09:54/4:43:21]  Acc_iter 8050        Data time: 0.00(0.01)  Forward time: 0.20(0.51)  Batch time: 0.20(0.52)
+2025-07-12 10:51:41,881   INFO  Train:   20/100 ( 20%) [ 347/408 ( 85%)]  Loss: 7.426 (6.55)  LR: 1.634e-03  Time cost: 03:00/00:31 [10:20/4:42:11]  Acc_iter 8100        Data time: 0.00(0.01)  Forward time: 0.43(0.51)  Batch time: 0.44(0.52)
+2025-07-12 10:51:42,069   INFO  
+2025-07-12 10:52:07,696   INFO  Train:   20/100 ( 20%) [ 397/408 ( 97%)]  Loss: 6.311 (6.54)  LR: 1.647e-03  Time cost: 03:25/00:05 [10:45/4:41:39]  Acc_iter 8150        Data time: 0.00(0.01)  Forward time: 0.72(0.51)  Batch time: 0.72(0.52)
+2025-07-12 10:52:10,804   INFO  Train:   20/100 ( 20%) [ 407/408 (100%)]  Loss: 5.319 (6.53)  LR: 1.650e-03  Time cost: 03:29/00:00 [10:49/4:38:48]  Acc_iter 8160        Data time: 0.00(0.01)  Forward time: 0.15(0.50)  Batch time: 0.15(0.51)
+2025-07-12 10:52:15,011   INFO  Train:   21/100 ( 21%) [   0/408 (  0%)]  Loss: 5.468 (5.47)  LR: 1.650e-03  Time cost: 00:03/24:11 [10:53/32:15:10]  Acc_iter 8161        Data time: 2.31(2.31)  Forward time: 1.25(1.25)  Batch time: 3.56(3.56)
+2025-07-12 10:52:35,555   INFO  Train:   21/100 ( 21%) [  39/408 ( 10%)]  Loss: 5.694 (6.49)  LR: 1.660e-03  Time cost: 00:24/03:42 [11:13/5:27:23]  Acc_iter 8200        Data time: 0.00(0.06)  Forward time: 0.58(0.54)  Batch time: 0.58(0.60)
+2025-07-12 10:53:01,580   INFO  Train:   21/100 ( 21%) [  89/408 ( 22%)]  Loss: 5.790 (6.45)  LR: 1.673e-03  Time cost: 00:50/02:57 [11:39/5:02:09]  Acc_iter 8250        Data time: 0.00(0.03)  Forward time: 0.31(0.53)  Batch time: 0.31(0.56)
+2025-07-12 10:53:01,790   INFO  
+2025-07-12 10:53:28,484   INFO  Train:   21/100 ( 21%) [ 139/408 ( 34%)]  Loss: 5.878 (6.38)  LR: 1.686e-03  Time cost: 01:17/02:28 [12:06/4:58:02]  Acc_iter 8300        Data time: 0.00(0.02)  Forward time: 0.79(0.53)  Batch time: 0.80(0.55)
+2025-07-12 10:53:53,763   INFO  Train:   21/100 ( 21%) [ 189/408 ( 46%)]  Loss: 6.819 (6.41)  LR: 1.699e-03  Time cost: 01:42/01:57 [12:32/4:51:13]  Acc_iter 8350        Data time: 0.00(0.02)  Forward time: 0.31(0.52)  Batch time: 0.31(0.54)
+2025-07-12 10:54:19,630   INFO  Train:   21/100 ( 21%) [ 239/408 ( 59%)]  Loss: 5.325 (6.42)  LR: 1.712e-03  Time cost: 02:08/01:30 [12:57/4:48:24]  Acc_iter 8400        Data time: 0.00(0.01)  Forward time: 0.60(0.52)  Batch time: 0.61(0.53)
+2025-07-12 10:54:19,840   INFO  
+2025-07-12 10:54:45,571   INFO  Train:   21/100 ( 21%) [ 289/408 ( 71%)]  Loss: 8.805 (6.40)  LR: 1.725e-03  Time cost: 02:34/01:03 [13:23/4:46:32]  Acc_iter 8450        Data time: 0.00(0.01)  Forward time: 0.53(0.52)  Batch time: 0.54(0.53)
+2025-07-12 10:55:11,385   INFO  Train:   21/100 ( 21%) [ 339/408 ( 83%)]  Loss: 6.661 (6.43)  LR: 1.738e-03  Time cost: 02:59/00:36 [13:49/4:44:54]  Acc_iter 8500        Data time: 0.00(0.01)  Forward time: 0.86(0.52)  Batch time: 0.86(0.53)
+2025-07-12 10:55:36,570   INFO  Train:   21/100 ( 21%) [ 389/408 ( 95%)]  Loss: 6.081 (6.41)  LR: 1.751e-03  Time cost: 03:25/00:09 [14:14/4:42:42]  Acc_iter 8550        Data time: 0.00(0.01)  Forward time: 0.59(0.51)  Batch time: 0.59(0.53)
+2025-07-12 10:55:36,789   INFO  
+2025-07-12 10:55:43,419   INFO  Train:   21/100 ( 21%) [ 407/408 (100%)]  Loss: 7.820 (6.39)  LR: 1.756e-03  Time cost: 03:31/00:00 [14:21/4:39:05]  Acc_iter 8568        Data time: 0.00(0.01)  Forward time: 0.16(0.51)  Batch time: 0.16(0.52)
+2025-07-12 10:55:47,619   INFO  Train:   22/100 ( 22%) [   0/408 (  0%)]  Loss: 4.559 (4.56)  LR: 1.756e-03  Time cost: 00:03/23:41 [14:25/31:11:10]  Acc_iter 8569        Data time: 2.53(2.53)  Forward time: 0.95(0.95)  Batch time: 3.48(3.48)
+2025-07-12 10:56:03,205   INFO  Train:   22/100 ( 22%) [  31/408 (  8%)]  Loss: 6.926 (6.38)  LR: 1.764e-03  Time cost: 00:19/03:44 [14:41/5:19:49]  Acc_iter 8600        Data time: 0.00(0.08)  Forward time: 0.44(0.51)  Batch time: 0.44(0.60)
+2025-07-12 10:56:28,771   INFO  Train:   22/100 ( 22%) [  81/408 ( 20%)]  Loss: 5.473 (6.35)  LR: 1.777e-03  Time cost: 00:44/02:57 [15:07/4:51:40]  Acc_iter 8650        Data time: 0.00(0.03)  Forward time: 0.32(0.51)  Batch time: 0.32(0.54)
+2025-07-12 10:56:55,663   INFO  Train:   22/100 ( 22%) [ 131/408 ( 32%)]  Loss: 5.203 (6.28)  LR: 1.790e-03  Time cost: 01:11/02:30 [15:33/4:49:54]  Acc_iter 8700        Data time: 0.00(0.02)  Forward time: 0.61(0.52)  Batch time: 0.61(0.54)
+2025-07-12 10:56:55,883   INFO  
+2025-07-12 10:57:21,005   INFO  Train:   22/100 ( 22%) [ 181/408 ( 44%)]  Loss: 5.857 (6.28)  LR: 1.803e-03  Time cost: 01:36/02:00 [15:59/4:44:19]  Acc_iter 8750        Data time: 0.00(0.02)  Forward time: 0.34(0.51)  Batch time: 0.34(0.53)
+2025-07-12 10:57:45,852   INFO  Train:   22/100 ( 22%) [ 231/408 ( 57%)]  Loss: 7.643 (6.30)  LR: 1.816e-03  Time cost: 02:01/01:32 [16:24/4:39:49]  Acc_iter 8800        Data time: 0.00(0.02)  Forward time: 0.33(0.51)  Batch time: 0.33(0.52)
+2025-07-12 10:58:11,553   INFO  Train:   22/100 ( 22%) [ 281/408 ( 69%)]  Loss: 7.179 (6.24)  LR: 1.829e-03  Time cost: 02:27/01:06 [16:49/4:38:22]  Acc_iter 8850        Data time: 0.00(0.01)  Forward time: 0.65(0.51)  Batch time: 0.65(0.52)
+2025-07-12 10:58:11,767   INFO  
+2025-07-12 10:58:36,989   INFO  Train:   22/100 ( 22%) [ 331/408 ( 81%)]  Loss: 6.322 (6.27)  LR: 1.841e-03  Time cost: 02:52/00:40 [17:15/4:36:49]  Acc_iter 8900        Data time: 0.00(0.01)  Forward time: 0.33(0.51)  Batch time: 0.33(0.52)
+2025-07-12 10:59:02,646   INFO  Train:   22/100 ( 22%) [ 381/408 ( 93%)]  Loss: 6.677 (6.24)  LR: 1.854e-03  Time cost: 03:18/00:14 [17:40/4:35:51]  Acc_iter 8950        Data time: 0.00(0.01)  Forward time: 0.36(0.51)  Batch time: 0.36(0.52)
+2025-07-12 10:59:14,335   INFO  Train:   22/100 ( 22%) [ 407/408 (100%)]  Loss: 8.875 (6.28)  LR: 1.861e-03  Time cost: 03:30/00:00 [17:52/4:33:16]  Acc_iter 8976        Data time: 0.00(0.01)  Forward time: 0.16(0.50)  Batch time: 0.17(0.52)
+2025-07-12 10:59:19,149   INFO  Train:   23/100 ( 23%) [   0/408 (  0%)]  Loss: 5.807 (5.81)  LR: 1.861e-03  Time cost: 00:04/27:45 [17:57/36:05:07]  Acc_iter 8977        Data time: 3.30(3.30)  Forward time: 0.79(0.79)  Batch time: 4.08(4.08)
+2025-07-12 10:59:30,418   INFO  Train:   23/100 ( 23%) [  23/408 (  6%)]  Loss: 6.350 (6.47)  LR: 1.867e-03  Time cost: 00:15/04:06 [18:08/5:39:00]  Acc_iter 9000        Data time: 0.01(0.14)  Forward time: 0.60(0.50)  Batch time: 0.61(0.64)
+2025-07-12 10:59:30,650   INFO  
+2025-07-12 10:59:56,059   INFO  Train:   23/100 ( 23%) [  73/408 ( 18%)]  Loss: 5.545 (6.34)  LR: 1.880e-03  Time cost: 00:40/03:05 [18:34/4:53:08]  Acc_iter 9050        Data time: 0.00(0.05)  Forward time: 0.40(0.50)  Batch time: 0.41(0.55)
+2025-07-12 11:00:21,474   INFO  Train:   23/100 ( 23%) [ 123/408 ( 30%)]  Loss: 6.135 (6.23)  LR: 1.893e-03  Time cost: 01:06/02:32 [18:59/4:42:57]  Acc_iter 9100        Data time: 0.00(0.03)  Forward time: 0.39(0.50)  Batch time: 0.39(0.54)
+2025-07-12 11:00:46,611   INFO  Train:   23/100 ( 23%) [ 173/408 ( 42%)]  Loss: 5.505 (6.16)  LR: 1.905e-03  Time cost: 01:31/02:03 [19:24/4:37:32]  Acc_iter 9150        Data time: 0.00(0.02)  Forward time: 0.38(0.50)  Batch time: 0.38(0.53)
+2025-07-12 11:00:46,823   INFO  
+2025-07-12 11:01:13,228   INFO  Train:   23/100 ( 23%) [ 223/408 ( 55%)]  Loss: 5.272 (6.13)  LR: 1.918e-03  Time cost: 01:58/01:37 [19:51/4:37:49]  Acc_iter 9200        Data time: 0.01(0.02)  Forward time: 0.69(0.51)  Batch time: 0.70(0.53)
+2025-07-12 11:01:38,580   INFO  Train:   23/100 ( 23%) [ 273/408 ( 67%)]  Loss: 6.884 (6.12)  LR: 1.931e-03  Time cost: 02:23/01:10 [20:16/4:35:25]  Acc_iter 9250        Data time: 0.00(0.02)  Forward time: 0.41(0.51)  Batch time: 0.41(0.52)
+2025-07-12 11:02:04,482   INFO  Train:   23/100 ( 23%) [ 323/408 ( 79%)]  Loss: 6.274 (6.09)  LR: 1.944e-03  Time cost: 02:49/00:44 [20:42/4:34:31]  Acc_iter 9300        Data time: 0.00(0.02)  Forward time: 0.62(0.51)  Batch time: 0.63(0.52)
+2025-07-12 11:02:04,686   INFO  
+2025-07-12 11:02:30,166   INFO  Train:   23/100 ( 23%) [ 373/408 ( 91%)]  Loss: 5.112 (6.12)  LR: 1.956e-03  Time cost: 03:15/00:18 [21:08/4:33:26]  Acc_iter 9350        Data time: 0.01(0.01)  Forward time: 0.33(0.51)  Batch time: 0.33(0.52)
+2025-07-12 11:02:46,059   INFO  Train:   23/100 ( 23%) [ 407/408 (100%)]  Loss: 6.193 (6.10)  LR: 1.965e-03  Time cost: 03:30/00:00 [21:24/4:30:46]  Acc_iter 9384        Data time: 0.00(0.01)  Forward time: 0.16(0.50)  Batch time: 0.16(0.52)
+2025-07-12 11:02:50,309   INFO  Train:   24/100 ( 24%) [   0/408 (  0%)]  Loss: 10.00 (10.0)  LR: 1.965e-03  Time cost: 00:03/23:34 [21:28/30:15:00]  Acc_iter 9385        Data time: 1.80(1.80)  Forward time: 1.67(1.67)  Batch time: 3.47(3.47)
+2025-07-12 11:02:57,646   INFO  Train:   24/100 ( 24%) [  15/408 (  4%)]  Loss: 5.495 (5.95)  LR: 1.969e-03  Time cost: 00:10/04:25 [21:35/5:53:21]  Acc_iter 9400        Data time: 0.00(0.12)  Forward time: 0.28(0.56)  Batch time: 0.28(0.68)
+2025-07-12 11:03:23,051   INFO  Train:   24/100 ( 24%) [  65/408 ( 16%)]  Loss: 5.655 (6.13)  LR: 1.982e-03  Time cost: 00:36/03:08 [22:01/4:46:39]  Acc_iter 9450        Data time: 0.00(0.03)  Forward time: 0.52(0.52)  Batch time: 0.52(0.55)
+2025-07-12 11:03:23,233   INFO  
+2025-07-12 11:03:48,539   INFO  Train:   24/100 ( 24%) [ 115/408 ( 28%)]  Loss: 6.817 (5.96)  LR: 1.994e-03  Time cost: 01:01/02:35 [22:26/4:37:28]  Acc_iter 9500        Data time: 0.00(0.02)  Forward time: 0.88(0.51)  Batch time: 0.88(0.53)
+2025-07-12 11:04:14,852   INFO  Train:   24/100 ( 24%) [ 165/408 ( 40%)]  Loss: 5.017 (5.92)  LR: 2.007e-03  Time cost: 01:28/02:08 [22:53/4:36:08]  Acc_iter 9550        Data time: 0.00(0.02)  Forward time: 0.55(0.51)  Batch time: 0.55(0.53)
+2025-07-12 11:04:40,495   INFO  Train:   24/100 ( 24%) [ 215/408 ( 53%)]  Loss: 6.392 (5.92)  LR: 2.019e-03  Time cost: 01:53/01:41 [23:18/4:33:36]  Acc_iter 9600        Data time: 0.00(0.01)  Forward time: 0.45(0.51)  Batch time: 0.45(0.53)
+2025-07-12 11:04:40,703   INFO  
+2025-07-12 11:05:05,099   INFO  Train:   24/100 ( 24%) [ 265/408 ( 65%)]  Loss: 4.763 (5.92)  LR: 2.032e-03  Time cost: 02:18/01:14 [23:43/4:29:51]  Acc_iter 9650        Data time: 0.00(0.01)  Forward time: 0.38(0.51)  Batch time: 0.38(0.52)
+2025-07-12 11:05:30,683   INFO  Train:   24/100 ( 24%) [ 315/408 ( 77%)]  Loss: 6.422 (5.91)  LR: 2.044e-03  Time cost: 02:43/00:48 [24:08/4:28:45]  Acc_iter 9700        Data time: 0.00(0.01)  Forward time: 0.46(0.51)  Batch time: 0.46(0.52)
+2025-07-12 11:05:55,771   INFO  Train:   24/100 ( 24%) [ 365/408 ( 89%)]  Loss: 6.911 (5.92)  LR: 2.057e-03  Time cost: 03:08/00:22 [24:34/4:27:08]  Acc_iter 9750        Data time: 0.00(0.01)  Forward time: 0.41(0.51)  Batch time: 0.41(0.52)
+2025-07-12 11:05:55,965   INFO  
+2025-07-12 11:06:15,811   INFO  Train:   24/100 ( 24%) [ 407/408 (100%)]  Loss: 7.291 (5.92)  LR: 2.067e-03  Time cost: 03:28/00:00 [24:54/4:24:42]  Acc_iter 9792        Data time: 0.00(0.01)  Forward time: 0.15(0.50)  Batch time: 0.16(0.51)
+2025-07-12 11:06:20,393   INFO  Train:   25/100 ( 25%) [   0/408 (  0%)]  Loss: 6.578 (6.58)  LR: 2.067e-03  Time cost: 00:03/27:03 [24:58/34:16:29]  Acc_iter 9793        Data time: 3.27(3.27)  Forward time: 0.71(0.71)  Batch time: 3.98(3.98)
+2025-07-12 11:06:23,588   INFO  Train:   25/100 ( 25%) [   7/408 (  2%)]  Loss: 6.019 (6.28)  LR: 2.069e-03  Time cost: 00:07/05:59 [25:01/7:43:20]  Acc_iter 9800        Data time: 0.00(0.41)  Forward time: 0.47(0.49)  Batch time: 0.48(0.90)
+2025-07-12 11:06:49,446   INFO  Train:   25/100 ( 25%) [  57/408 ( 14%)]  Loss: 4.911 (5.84)  LR: 2.081e-03  Time cost: 00:33/03:19 [25:27/4:53:47]  Acc_iter 9850        Data time: 0.00(0.06)  Forward time: 0.32(0.51)  Batch time: 0.33(0.57)
+2025-07-12 11:07:14,750   INFO  Train:   25/100 ( 25%) [ 107/408 ( 26%)]  Loss: 5.203 (5.88)  LR: 2.094e-03  Time cost: 00:58/02:42 [25:53/4:38:11]  Acc_iter 9900        Data time: 0.00(0.04)  Forward time: 0.65(0.51)  Batch time: 0.66(0.54)
+2025-07-12 11:07:14,940   INFO  
+2025-07-12 11:07:41,182   INFO  Train:   25/100 ( 25%) [ 157/408 ( 38%)]  Loss: 4.690 (5.77)  LR: 2.106e-03  Time cost: 01:24/02:14 [26:19/4:35:51]  Acc_iter 9950        Data time: 0.01(0.03)  Forward time: 0.64(0.51)  Batch time: 0.65(0.54)
+2025-07-12 11:08:07,119   INFO  Train:   25/100 ( 25%) [ 207/408 ( 51%)]  Loss: 5.663 (5.86)  LR: 2.118e-03  Time cost: 01:50/01:46 [26:45/4:33:13]  Acc_iter 10000       Data time: 0.00(0.02)  Forward time: 0.48(0.51)  Batch time: 0.49(0.53)
