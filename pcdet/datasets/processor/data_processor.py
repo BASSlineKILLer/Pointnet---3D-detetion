@@ -30,7 +30,7 @@ class VoxelGeneratorWrapper():
             self._voxel_generator = VoxelGenerator(
                 voxel_size=vsize_xyz,
                 point_cloud_range=coors_range_xyz,
-                num_point_features=5,
+                num_point_features=4,
                 max_num_points=max_num_points_per_voxel,
                 max_voxels=max_num_voxels
             )
@@ -38,7 +38,7 @@ class VoxelGeneratorWrapper():
             self._voxel_generator = VoxelGenerator(
                 vsize_xyz=vsize_xyz,
                 coors_range_xyz=coors_range_xyz,
-                num_point_features=5,
+                num_point_features=4,
                 max_num_points_per_voxel=max_num_points_per_voxel,
                 max_num_voxels=max_num_voxels
             )
@@ -151,6 +151,7 @@ class DataProcessor(object):
 
         points = data_dict['points']
         voxel_output = self.voxel_generator.generate(points)
+        #print(voxel_output)
         voxels, coordinates, num_points = voxel_output
 
         if not data_dict['use_lead_xyz']:

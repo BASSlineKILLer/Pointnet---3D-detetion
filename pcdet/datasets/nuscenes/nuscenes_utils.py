@@ -557,7 +557,6 @@ def transform_det_annos_to_nusc_annos(det_annos, nusc):
 
 
 def format_nuscene_results(metrics, class_names, version='default'):
-    print(metrics)
     result = '----------------Nuscene %s results-----------------\n' % version
     for name in class_names:
         threshs = ', '.join(list(metrics['label_aps'][name].keys()))

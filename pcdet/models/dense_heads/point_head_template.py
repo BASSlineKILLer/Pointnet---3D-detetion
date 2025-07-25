@@ -21,8 +21,6 @@ class PointHeadTemplate(nn.Module):
             loss_utils.SigmoidFocalClassificationLoss(alpha=0.25, gamma=2.0)
         )
         reg_loss_type = losses_cfg.get('LOSS_REG', None)
-        #print(reg_loss_type)
-        reg_loss_type='WeightedSmoothL1Loss'
         if reg_loss_type == 'smooth-l1':
             self.reg_loss_func = F.smooth_l1_loss
         elif reg_loss_type == 'l1':

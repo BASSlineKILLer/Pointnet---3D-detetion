@@ -87,7 +87,6 @@ class PointHeadBox(PointHeadTemplate):
             point_features = batch_dict['point_features_before_fusion']
         else:
             point_features = batch_dict['point_features']
-            #print(point_features.shape,"point_after")
         point_cls_preds = self.cls_layers(point_features)  # (total_points, num_class)
         point_box_preds = self.box_layers(point_features)  # (total_points, box_code_size)
 

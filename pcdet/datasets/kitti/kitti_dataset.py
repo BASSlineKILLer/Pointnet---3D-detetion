@@ -370,6 +370,7 @@ class KittiDataset(DatasetTemplate):
 
     def __getitem__(self, index):
         # index = 4
+
         if self._merge_all_iters_to_one_epoch:
             index = index % len(self.kitti_infos)
 
